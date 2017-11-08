@@ -23,11 +23,10 @@ public class MainActivity extends AppCompatActivity {
     TextView instructionTV;
     TextView myScoreTV;
     TextView yourScoreTV;
-    Integer myScore = 0;
-    Integer yourScore = 0;
+    Integer myScore;
+    Integer yourScore;
     String myScoreStr = "0";
     String yourScoreStr = "0";
-    int turn;
     int player;
     int computer;
     ArrayList<Weapons> choices;
@@ -38,56 +37,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         choices = new ArrayList<>();
-        generateChoices();
-        turn = 0;
-        rockButton = (Button) findViewById(R.id.rock);
-        paperButton = (Button) findViewById(R.id.paper);
-        scissorsButton = (Button) findViewById(R.id.scissors);
-        welcomeTV = (TextView) findViewById(R.id.welcome);
-        welcomeTV.setText("Welcome to Rock-Paper-Scissors");
-        instructionTV = (TextView) findViewById(R.id.instruction);
-        instructionTV.setText("Select a weapon below to do battle with me....");
-        getScoresBack();
-        myScore = Integer.valueOf(myScoreStr);
-        yourScore = Integer.valueOf(yourScoreStr);
-        myScoreTV = (TextView) findViewById(R.id.player_score);
-        myScoreStr = String.valueOf(myScore);
-        myScoreTV.setText(myScoreStr);
-        yourScoreTV = (TextView) findViewById(R.id.comp_score);
-        yourScoreStr = String.valueOf(yourScore);
-        yourScoreTV.setText(yourScoreStr);
-    }
+        Intent i = getIntent();
+        Bundle extras = i.getExtras();
 
-    public ArrayList<Weapons> generateChoices() {
-        for (Weapons weapon : Weapons.values()) {
-            choices.add(weapon);
-        }
-        return choices;
-    }
+        if (i.hasExtra("myScore")) {
 
-    public void getScoresBack(){
-        if(!(turn == 0)){
-            Intent i = getIntent();
-            Bundle extras = i.getExtras();
             myScoreStr = extras.getString("myScore");
-            yourScoreStr = extras.getString("yourScore");
+            yourScoreStr = extras.getString("yourScore");}
+
+
+            rockButton = (Button) findViewById(R.id.rock);
+            paperButton = (Button) findViewById(R.id.paper);
+            scissorsButton = (Button) findViewById(R.id.scissors);
+            welcomeTV = (TextView) findViewById(R.id.welcome);
+            welcomeTV.setText("Welcome to Rock-Paper-Scissors");
+            instructionTV = (TextView) findViewById(R.id.instruction);
+            instructionTV.setText("Select a weapon below to do battle with me....");
+            myScore = Integer.valueOf(myScoreStr);
+            yourScore = Integer.valueOf(yourScoreStr);
+            myScoreTV = (TextView) findViewById(R.id.comp_score);
+            myScoreStr = String.valueOf(myScore);
+            myScoreTV.setText(myScoreStr);
+            yourScoreTV = (TextView) findViewById(R.id.player_score);
+            yourScoreStr = String.valueOf(yourScore);
+            yourScoreTV.setText(yourScoreStr);
         }
-
-    }
-
-    public int getChoiceSize(){
-        return choices.size();
-    }
-
-    public Weapons getChoiceAtIndex(int index){
-        return choices.get(index);
-    }
-
-
 
     public int getRandomNumber() {
         Random rand = new Random();
-        int listSize = getChoiceSize();
+        int listSize = 3;
         int random = rand.nextInt(listSize);
         return random;
     }
