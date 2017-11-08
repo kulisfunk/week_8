@@ -27,11 +27,11 @@ public class PlaneArrayAdapter extends ArrayAdapter<Plane> {
         }
         Plane currentPlane = getItem(position);
         TextView name = (TextView)listItemView.findViewById(R.id.name_text);
-        name.setText(currentPlane.getName());
+        name.setText(currentPlane.getName().toUpperCase());
         TextView title = (TextView)listItemView.findViewById(R.id.nickname_text);
         title.setText(currentPlane.getNickname());
         TextView year = (TextView)listItemView.findViewById(R.id.year_text);
-        year.setText(currentPlane.getYear());
+        year.setText("First Flight " + currentPlane.getYear());
         listItemView.setTag(currentPlane);
 
         return listItemView;

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Menu</string>
+    <string name="say_hello">Hello</string>
+    <string name="menu_toast_hello">Hello</string>
+</resources>

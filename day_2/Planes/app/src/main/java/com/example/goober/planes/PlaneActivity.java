@@ -23,6 +23,7 @@ public class PlaneActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plane);
 
 
+
         Intent i = getIntent();
         Bundle extras = i.getExtras();
         String name = extras.getString("name");
@@ -33,14 +34,18 @@ public class PlaneActivity extends AppCompatActivity {
         nicknameTV = (TextView)findViewById(R.id.nickname);
         yearTV = (TextView)findViewById(R.id.year);
         imageIV = (ImageView) findViewById(R.id.image);
-        String currentImage = "planes:drawable/" + name;
+//        String currentImage = "planes:drawable/" + name;
+        String currentImage = name;
 
-        int id = getResources().getIdentifier(currentImage, "drawable", getPackageName());
-        imageIV.setImageResource(id);
+//        int id = getResources().getIdentifier(currentImage, "drawable", getPackageName());
+//        imageIV.setImageResource(id);
 
-        nameTV.setText(name);
+        Drawable pic = getDrawable(getResources().getIdentifier(currentImage, "drawable", getPackageName()));
+        imageIV.setImageDrawable(pic);
+
+        nameTV.setText(name.toUpperCase());
         nicknameTV.setText(nickname);
-        yearTV.setText(year);
+        yearTV.setText("First Flight" + year);
             }
 }
 
