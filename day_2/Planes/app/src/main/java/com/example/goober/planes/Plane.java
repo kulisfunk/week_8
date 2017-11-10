@@ -11,6 +11,8 @@ import static com.example.goober.planes.R.id.year;
 
 public class Plane {
 
+
+    private int id;
     private String name;
     private String nickname;
     private String year;
@@ -20,6 +22,14 @@ public class Plane {
         this.nickname = nickname;
         this.year = year;
     }
+
+    public Plane(int id, String name, String nickname, String year) {
+        this.id = id;
+        this.name = name;
+        this.nickname = nickname;
+        this.year = year;
+    }
+
 
     public String getName() {
         return name;
@@ -32,5 +42,7 @@ public class Plane {
     public String getYear() {
         return year;
     }
+
+    public int getId() { return id; }
 
 }

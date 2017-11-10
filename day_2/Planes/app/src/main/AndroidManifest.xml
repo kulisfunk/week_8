@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".PlaneActivity"></activity>
+        <activity android:name=".PlaneActivity" />
+        <activity android:name=".AddPlaneActivity"></activity>
     </application>
 
 </manifest>

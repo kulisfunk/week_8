@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Planes</string>
+    <string name="add_plane">Add Plane</string>
 </resources>
