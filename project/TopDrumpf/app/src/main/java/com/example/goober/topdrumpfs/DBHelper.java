@@ -11,7 +11,6 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static android.webkit.WebSettings.PluginState.ON;
 
 
 /**
@@ -197,8 +196,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public ArrayList<Plane> all() {
-        ArrayList<Plane> planes = new ArrayList<>();
+    public ArrayList<Plane> allPlanes() {
+        ArrayList<Plane> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME + " ORDER BY " + PLANES_COLUMN_NAME, null);
         while (cursor.moveToNext()) {
@@ -208,11 +207,30 @@ public class DBHelper extends SQLiteOpenHelper {
             String year = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_YEAR));
             String plane_country = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_COUNTRY));
 
-            Plane plane = new Plane(id, name, nickname, year, plane_country);
-            planes.add(plane);
+            Plane plane = new Plane(id, name , nickname, year, plane_country) {
+            };
+            cards.add(plane);
         }
             cursor.close();
-        return planes;
+        return cards;
+    }
+
+    public ArrayList<Car> allCars() {
+        ArrayList<Car> cards = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + CARS_TABLE_NAME + " ORDER BY " + CARS_COLUMN_MAKE, null);
+        while (cursor.moveToNext()) {
+            Integer id = cursor.getInt(cursor.getColumnIndex(CARS_COLUMN_ID));
+            String make = cursor.getString(cursor.getColumnIndex(CARS_COLUMN_MAKE));
+            String model = cursor.getString(cursor.getColumnIndex(CARS_COLUMN_MODEL));
+            String year = cursor.getString(cursor.getColumnIndex(CARS_COLUMN_YEAR));
+            String car_country = cursor.getString(cursor.getColumnIndex(CARS_COLUMN_COUNTRY));
+
+            Car car = new Car(id, make, model, year, car_country);
+            cards.add(car);
+        }
+        cursor.close();
+        return cards;
     }
 
     public void delete(Integer id) {
@@ -222,7 +240,7 @@ public class DBHelper extends SQLiteOpenHelper {
             db.delete(PLANES_TABLE_NAME, sql, values);
         }
 
-    public void checkDatabase() {
+    public void checkPlaneDatabase() {
         SQLiteDatabase db = this.getWritableDatabase();
         String count = "SELECT count(*) FROM planes";
         Cursor cursor = db.rawQuery(count, null);
@@ -231,6 +249,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (icount == 0) {
 
             this.savePlane("f4", "Phantom", "1966", "usa");
+            this.savePlanestats(1, 1600, 2448, 60000, 27900, 12, 8, 4, 3, 1, 5, 6, 2);
 //            this.savePlane("f14", "Tomcat", "1970", "usa");
 //            this.savePlane("f15", "Eagle", "1986", "usa");
 //            this.savePlane("fa18", "Hornet", "1995", "usa");
@@ -247,6 +266,33 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
 
     }
+    public void checkPlanestatsDatabase() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String count = "SELECT count(*) FROM planestats";
+        Cursor cursor = db.rawQuery(count, null);
+        cursor.moveToFirst();
+        int icount = cursor.getInt(0);
+        if (icount == 0) {
+
+//            this.savePlane("f4", "Phantom", "1966", "usa");
+            this.savePlanestats(1, 1600, 2448, 60000, 27900, 12, 8, 4, 3, 1, 5, 6, 2);
+//            this.savePlane("f14", "Tomcat", "1970", "usa");
+//            this.savePlane("f15", "Eagle", "1986", "usa");
+//            this.savePlane("fa18", "Hornet", "1995", "usa");
+//            this.savePlane("f3", "Tornado", "1974", "uk");
+//            this.savePlane("su27", "Flanker", "1977", "russia");
+//            this.savePlane("f1", "Lightning", "1954", "uk");
+//            this.savePlane("mig29", "Fulcrum", "1977", "russia");
+//            this.savePlane("c16", "Typhoon", "1994", "uk");
+//            this.savePlane("gr7", "Harrier", "1985", "uk");
+//            this.savePlane("mig25", "Foxbat", "1970", "russia");
+//            this.savePlane("gr1", "Jaguar", "1968", "uk");
+//            this.savePlane("s2b", "Buccaneer", "1958", "uk");
+        }
+        cursor.close();
+
+    }
+
 
 
 

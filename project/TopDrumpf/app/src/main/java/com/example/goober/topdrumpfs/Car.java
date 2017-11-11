@@ -1,7 +1,5 @@
 package com.example.goober.topdrumpfs;
 
-import static android.R.attr.name;
-
 /**
  * Created by goober on 10/11/2017.
  */
@@ -61,5 +59,25 @@ public class Car {
         this.weight4 = weight4;
         this.weight5 = weight5;
         this.weight6 = weight6;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getFirst() {
+        return make;
+    }
+
+    public String getSecond() {
+        return model;
+    }
+
+    public String getThird() {
+        return year;
+    }
+
+    public String getFourth() {
+        return car_country;
     }
 }

@@ -60,4 +60,76 @@ public class Plane {
         this.weight5 = weight5;
         this.weight6 = weight6;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getFirst() {
+        return name;
+    }
+
+    public String getSecond() {
+        return nickname;
+    }
+
+    public String getThird() {
+        return year;
+    }
+
+    public String getFourth() {
+        return plane_country;
+    }
+
+    public Integer getPlane_id() {
+        return plane_id;
+    }
+
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public Integer getRange() {
+        return range;
+    }
+
+    public Integer getMax_takeoff() {
+        return max_takeoff;
+    }
+
+    public Integer getWing() {
+        return wing;
+    }
+
+    public Integer getFirepower() {
+        return firepower;
+    }
+
+    public Integer getWeight1() {
+        return weight1;
+    }
+
+    public Integer getWeight2() {
+        return weight2;
+    }
+
+    public Integer getWeight3() {
+        return weight3;
+    }
+
+    public Integer getWeight4() {
+        return weight4;
+    }
+
+    public Integer getWeight5() {
+        return weight5;
+    }
+
+    public Integer getWeight6() {
+        return weight6;
+    }
 }

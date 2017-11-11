@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.goober.topdrumpfs.PlaneActivity">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="61dp"
+        android:layout_height="63dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="26dp"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/nickname"
+        android:layout_width="110dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="nickname"
+        app:layout_constraintLeft_toRightOf="@+id/name"
+        android:layout_marginLeft="36dp" />
+
+    <TextView
+        android:id="@+id/year"
+        android:layout_width="50dp"
+        android:layout_height="20dp"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintLeft_toRightOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/nickname"
+        tools:text="year" />
+
+    <TextView
+        android:id="@+id/country"
+        android:layout_width="72dp"
+        android:layout_height="47dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="35dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="country"
+        app:layout_constraintLeft_toRightOf="@+id/nickname"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="0.606" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="Max Speed (mph)"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="194dp"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Range (miles)"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Max Height (ft)"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Take-off Weight (Kg)"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Wing Span (m)"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Firepower"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/speed"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="max speed"
+        android:layout_marginTop="194dp"
+        app:layout_constraintTop_toBottomOf="@+id/year" />
+
+    <TextView
+        android:id="@+id/range"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/speed"
+        tools:text="range" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/range"
+        tools:text="max height" />
+
+    <TextView
+        android:id="@+id/max_takeoff"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/height"
+        tools:text="takeoff" />
+
+    <TextView
+        android:id="@+id/wing"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/max_takeoff"
+        tools:text="wing span" />
+
+    <TextView
+        android:id="@+id/firepower"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="109dp"
+        android:layout_marginTop="17dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wing"
+        tools:text="firepower" />
+
+</android.support.constraint.ConstraintLayout>
