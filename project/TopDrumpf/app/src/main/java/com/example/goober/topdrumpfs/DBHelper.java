@@ -199,15 +199,27 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Plane> allPlanes() {
         ArrayList<Plane> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME + " ORDER BY " + PLANES_COLUMN_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NAME));
             String nickname = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NICKNAME));
             String year = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_YEAR));
             String plane_country = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_COUNTRY));
+            Integer speed = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_SPEED));
+            Integer height = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_HEIGHT));
+            Integer range = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_RANGE));
+            Integer takeoff = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_MAXTAKEOFF));
+            Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
+            Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
+            Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
+            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
+            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
+            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
+            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
+            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
 
-            Plane plane = new Plane(id, name , nickname, year, plane_country) {
+            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
             };
             cards.add(plane);
         }

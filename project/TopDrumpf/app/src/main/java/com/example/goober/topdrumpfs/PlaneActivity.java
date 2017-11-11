@@ -1,7 +1,9 @@
 package com.example.goober.topdrumpfs;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -17,6 +19,8 @@ public class PlaneActivity extends AppCompatActivity {
     TextView max_takeoffTV;
     TextView wingTV;
     TextView firepowerTV;
+    ImageView planeImageIV;
+    ImageView flagImageIV;
 
     Bundle extras;
 
@@ -40,7 +44,6 @@ public class PlaneActivity extends AppCompatActivity {
         nameTV = (TextView)findViewById(R.id.name);
         nicknameTV = (TextView)findViewById(R.id.nickname);
         yearTV = (TextView)findViewById(R.id.year);
-        countryTV = (TextView)findViewById(R.id.country);
         speedTV = (TextView)findViewById(R.id.speed);
         heightTV = (TextView)findViewById(R.id.height);
         rangeTV = (TextView)findViewById(R.id.range);
@@ -48,15 +51,19 @@ public class PlaneActivity extends AppCompatActivity {
         wingTV = (TextView)findViewById(R.id.wing);
         firepowerTV = (TextView)findViewById(R.id.firepower);
 
+        planeImageIV = (ImageView) findViewById(R.id.plane_image);
+        String planeImage = name.toLowerCase();
+        Drawable plane = getDrawable(getResources().getIdentifier(planeImage, "drawable", getPackageName()));
+        planeImageIV.setImageDrawable(plane);
 
+        flagImageIV = (ImageView) findViewById(R.id.flag_image);
+        String flagImage = country.toLowerCase();
+        Drawable flag = getDrawable(getResources().getIdentifier(flagImage, "drawable", getPackageName()));
+        flagImageIV.setImageDrawable(flag);
 
-//        Drawable pic = getDrawable(getResources().getIdentifier(currentImage, "drawable", getPackageName()));
-//        imageIV.setImageDrawable(pic);
-//
         nameTV.setText(name.toUpperCase());
         nicknameTV.setText(nickname);
         yearTV.setText(year);
-        countryTV.setText(country.toUpperCase());
         speedTV.setText(speed);
         heightTV.setText(height);
         rangeTV.setText(range);
