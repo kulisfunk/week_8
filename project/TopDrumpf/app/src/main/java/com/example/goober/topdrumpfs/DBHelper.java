@@ -11,6 +11,10 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static com.example.goober.topdrumpfs.R.id.firepower;
+import static com.example.goober.topdrumpfs.R.id.range;
+import static com.example.goober.topdrumpfs.R.id.speed;
+import static com.example.goober.topdrumpfs.R.id.wing;
 
 
 /**
@@ -199,27 +203,30 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Plane> allPlanes() {
         ArrayList<Plane> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
+//        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NAME));
             String nickname = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NICKNAME));
             String year = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_YEAR));
             String plane_country = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_COUNTRY));
-            Integer speed = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_SPEED));
-            Integer height = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_HEIGHT));
-            Integer range = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_RANGE));
-            Integer takeoff = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_MAXTAKEOFF));
-            Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
-            Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
-            Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
-            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
-            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
-            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
-            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
-            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
+//            Integer speed = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_SPEED));
+//            Integer height = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_HEIGHT));
+//            Integer range = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_RANGE));
+//            Integer takeoff = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_MAXTAKEOFF));
+//            Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
+//            Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
+//            Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
+//            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
+//            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
+//            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
+//            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
+//            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
 
-            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
+            Plane plane = new Plane(id, name , nickname, year, plane_country) {
+
+//            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
             };
             cards.add(plane);
         }
@@ -261,19 +268,37 @@ public class DBHelper extends SQLiteOpenHelper {
         if (icount == 0) {
 
             this.savePlane("f4", "Phantom", "1966", "usa");
-            this.savePlanestats(1, 1600, 2448, 60000, 27900, 12, 8, 4, 3, 1, 5, 6, 2);
-//            this.savePlane("f14", "Tomcat", "1970", "usa");
-//            this.savePlane("f15", "Eagle", "1986", "usa");
-//            this.savePlane("fa18", "Hornet", "1995", "usa");
-//            this.savePlane("f3", "Tornado", "1974", "uk");
-//            this.savePlane("su27", "Flanker", "1977", "russia");
-//            this.savePlane("f1", "Lightning", "1954", "uk");
-//            this.savePlane("mig29", "Fulcrum", "1977", "russia");
-//            this.savePlane("c16", "Typhoon", "1994", "uk");
-//            this.savePlane("gr7", "Harrier", "1985", "uk");
-//            this.savePlane("mig25", "Foxbat", "1970", "russia");
-//            this.savePlane("gr1", "Jaguar", "1968", "uk");
-//            this.savePlane("s2b", "Buccaneer", "1958", "uk");
+            this.savePlane("f14", "Tomcat", "1970", "usa");
+            this.savePlane("f15", "Eagle", "1986", "usa");
+            this.savePlane("fa18", "Hornet", "1995", "usa");
+            this.savePlane("f3", "Tornado", "1974", "uk");
+            this.savePlane("su27", "Flanker", "1977", "russia");
+            this.savePlane("f1", "Lightning", "1954", "uk");
+            this.savePlane("mig29", "Fulcrum", "1977", "russia");
+            this.savePlane("c16", "Typhoon", "1994", "uk");
+            this.savePlane("gr7", "Harrier", "1985", "uk");
+            this.savePlane("mig25", "Foxbat", "1970", "russia");
+            this.savePlane("gr1", "Jaguar", "1968", "uk");
+            this.savePlane("s2b", "Buccaneer", "1958", "uk");
+            this.savePlane("su57", "Flatfish", "2010", "russia");
+            this.savePlane("f22", "Raptor", "1997", "usa");
+            this.savePlane("f35", "Lightning II", "2006", "usa");
+            this.savePlane("j10", "Firebird", "1998", "china");
+            this.savePlane("a10", "Thunderbolt", "1972", "usa");
+            this.savePlane("d", "Rafale", "1991", "france");
+            this.savePlane("mig23", "Flogger", "1967", "russia");
+            this.savePlane("jas39", "Grippen", "1978", "sweden");
+            this.savePlane("f117a", "Nighthawk", "1981", "usa");
+            this.savePlane("yf23", "Blackwidow II", "1990", "usa");
+            this.savePlane("mig35", "Fulcrum-F", "2007", "russia");
+            this.savePlane("t38", "Talon", "1959", "usa");
+            this.savePlane("f16", "Falcon", "1974", "usa");
+            this.savePlane("ba167", "Strikemaster", "1967", "uk");
+            this.savePlane("g8", "Mirage G", "1967", "france");
+            this.savePlane("aj37", "Viggen", "1967", "sweden");
+            this.savePlane("fiat", "G.91", "1956", "italy");
+            this.savePlane("a7", "Corsair II", "1965", "usa");
+            this.savePlane("f104", "Starfighter", "1956", "usa");
         }
         cursor.close();
 
@@ -286,7 +311,6 @@ public class DBHelper extends SQLiteOpenHelper {
         int icount = cursor.getInt(0);
         if (icount == 0) {
 
-//            this.savePlane("f4", "Phantom", "1966", "usa");
             this.savePlanestats(1, 1600, 2448, 60000, 27900, 12, 8, 4, 3, 1, 5, 6, 2);
 //            this.savePlane("f14", "Tomcat", "1970", "usa");
 //            this.savePlane("f15", "Eagle", "1986", "usa");

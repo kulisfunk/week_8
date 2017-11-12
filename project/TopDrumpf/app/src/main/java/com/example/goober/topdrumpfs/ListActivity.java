@@ -60,12 +60,12 @@ public class ListActivity extends AppCompatActivity {
         i.putExtra("nickname", plane.getSecond());
         i.putExtra("year", plane.getThird());
         i.putExtra("country", plane.getFourth());
-        i.putExtra("speed", plane.getSpeed().toString());
-        i.putExtra("height", plane.getHeight().toString());
-        i.putExtra("range", plane.getRange().toString());
-        i.putExtra("max_takeoff", plane.getMax_takeoff().toString());
-        i.putExtra("wing", plane.getWing().toString());
-        i.putExtra("firepower", plane.getFirepower().toString());
+//        i.putExtra("speed", plane.getSpeed().toString());
+//        i.putExtra("height", plane.getHeight().toString());
+//        i.putExtra("range", plane.getRange().toString());
+//        i.putExtra("max_takeoff", plane.getMax_takeoff().toString());
+//        i.putExtra("wing", plane.getWing().toString());
+//        i.putExtra("firepower", plane.getFirepower().toString());
         startActivity(i);
 
     }
