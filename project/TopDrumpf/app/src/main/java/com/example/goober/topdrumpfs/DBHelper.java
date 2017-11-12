@@ -203,30 +203,30 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Plane> allPlanes() {
         ArrayList<Plane> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
-//        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NAME));
             String nickname = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NICKNAME));
             String year = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_YEAR));
             String plane_country = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_COUNTRY));
-//            Integer speed = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_SPEED));
-//            Integer height = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_HEIGHT));
-//            Integer range = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_RANGE));
-//            Integer takeoff = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_MAXTAKEOFF));
-//            Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
-//            Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
-//            Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
-//            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
-//            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
-//            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
-//            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
-//            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
+            Integer speed = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_SPEED));
+            Integer height = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_HEIGHT));
+            Integer range = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_RANGE));
+            Integer takeoff = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_MAXTAKEOFF));
+            Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
+            Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
+            Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
+            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
+            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
+            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
+            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
+            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
 
-            Plane plane = new Plane(id, name , nickname, year, plane_country) {
+//            Plane plane = new Plane(id, name , nickname, year, plane_country) {
 
-//            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
+            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
             };
             cards.add(plane);
         }
@@ -312,18 +312,37 @@ public class DBHelper extends SQLiteOpenHelper {
         if (icount == 0) {
 
             this.savePlanestats(1, 1600, 2448, 60000, 27900, 12, 8, 4, 3, 1, 5, 6, 2);
-//            this.savePlane("f14", "Tomcat", "1970", "usa");
-//            this.savePlane("f15", "Eagle", "1986", "usa");
-//            this.savePlane("fa18", "Hornet", "1995", "usa");
-//            this.savePlane("f3", "Tornado", "1974", "uk");
-//            this.savePlane("su27", "Flanker", "1977", "russia");
-//            this.savePlane("f1", "Lightning", "1954", "uk");
-//            this.savePlane("mig29", "Fulcrum", "1977", "russia");
-//            this.savePlane("c16", "Typhoon", "1994", "uk");
-//            this.savePlane("gr7", "Harrier", "1985", "uk");
-//            this.savePlane("mig25", "Foxbat", "1970", "russia");
-//            this.savePlane("gr1", "Jaguar", "1968", "uk");
-//            this.savePlane("s2b", "Buccaneer", "1958", "uk");
+            this.savePlanestats(2, 1544, 50000, 1840, 33720, 19, 6, 0, 0, 0, 0, 1, 0);
+            this.savePlanestats(3, 1650, 65000, 3450, 30845, 13, 8, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(4, 1190, 50000, 2071, 23541, 12, 9, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(5, 1490, 50000, 2650, 27986, 14, 6, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(6, 1550, 62523, 2193, 30450, 15, 8, 0, 0, 0, 1, 0, 0);
+            this.savePlanestats(7, 1300, 54000, 1270, 20752, 11, 6, 0, 1, 0, 0, 0, 0);
+            this.savePlanestats(8, 1490, 59100, 1300, 18000, 11, 7, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(9, 1550, 65000, 2350, 23500, 11, 10, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(10, 662, 50000, 2015, 14061, 9, 9, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(11, 2170, 67915, 1390, 36720, 14, 6, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(12, 1056, 45900, 2190, 15700, 9, 7, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(13, 667, 40000, 2300, 28000, 13, 6, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(14, 1320, 65000, 2175, 35000, 14, 9, 0, 0, 0, 1, 0, 0);
+            this.savePlanestats(15, 1500, 65000, 2000, 38000, 14, 8, 0, 0, 0, 1, 0, 0);
+            this.savePlanestats(16, 1200, 50000, 1379, 31800, 11, 10, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(17, 1492, 59055, 1150, 19277, 10, 8, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(18, 439, 45000, 2580, 23000, 18, 10, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(19, 1188, 50000, 2000, 24500, 11, 11, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(20, 1168, 60695, 1750, 17800, 14, 6, 0, 1, 0, 0, 0, 0);
+            this.savePlanestats(21, 1370, 50000, 1983, 14000, 8, 8, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(22, 617, 45000, 1720, 23800, 13, 11, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(23, 1450, 65000, 2790, 29000, 13, 6, 0, 1, 0, 0, 0, 0);
+            this.savePlanestats(24, 1490, 62340, 1930, 29700, 12, 9, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(25, 858, 50000, 1140, 5485, 8, 4, 0, 1, 0, 0, 0, 0);
+            this.savePlanestats(26, 1320, 50000, 2620, 19200, 10, 8, 0 ,0,1, 0, 0, 0);
+            this.savePlanestats(27, 481, 40000, 1382, 5215, 11, 5, 0, 0, 1, 0, 0, 0);
+            this.savePlanestats(28, 1492, 60700, 2392, 20000, 15, 7, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(29, 1386, 59100, 1242, 20000, 11, 6, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(30, 668, 43000, 715, 5500, 9, 6, 0,1 , 0, 0, 0, 0);
+            this.savePlanestats(31, 690, 42000, 1544, 19050, 12, 8, 0, 0, 0, 0, 0, 1);
+            this.savePlanestats(32, 1528, 50000, 1630, 13166, 7, 6, 1, 0, 0, 0, 0, 0);
         }
         cursor.close();
 
