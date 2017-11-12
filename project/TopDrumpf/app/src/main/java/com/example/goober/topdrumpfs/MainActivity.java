@@ -1,8 +1,10 @@
 package com.example.goober.topdrumpfs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,6 +15,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button planeButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(this);
         dbHelper.checkPlaneDatabase();
         dbHelper.checkPlanestatsDatabase();
+
+        planeButton = (Button) findViewById(R.id.planeBtn);
 
         TextView tv =(TextView)findViewById(R.id.db_info);
 
@@ -91,6 +97,13 @@ public class MainActivity extends AppCompatActivity {
         i.putExtra("year", car.getThird());
         i.putExtra("car_country", car.getFourth());
         i.putExtra("id", car.getId());
+        startActivity(i);
+
+    }
+
+    public void onPlaneButtonClicked(View button){
+
+        Intent i = new Intent(this, PlaneGameActivity.class);
         startActivity(i);
 
     }

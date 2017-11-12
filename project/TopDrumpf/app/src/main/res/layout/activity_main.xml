@@ -8,15 +8,14 @@
 
     <TextView
         android:id="@+id/db_info"
-        android:layout_width="261dp"
-        android:layout_height="324dp"
+        android:layout_width="240dp"
+        android:layout_height="209dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="-40dp"
         tools:text="db info" />
 
     <Button
@@ -25,9 +24,23 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="66dp"
+        android:layout_marginTop="30dp"
         android:text="db viewer"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/db_info" />
+        app:layout_constraintTop_toBottomOf="@+id/db_info"
+        app:layout_constraintHorizontal_bias="0.502" />
+
+    <Button
+        android:id="@+id/planeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="69dp"
+        android:onClick="onPlaneButtonClicked"
+        android:text="Play Planes"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/db_button" />
 </android.support.constraint.ConstraintLayout>

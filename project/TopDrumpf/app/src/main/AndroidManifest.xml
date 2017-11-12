@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".AndroidDatabaseManager" />
         <activity android:name=".ListActivity" />
-        <activity android:name=".PlaneActivity"></activity>
+        <activity android:name=".PlaneActivity" />
+        <activity android:name=".PlaneGameActivity"></activity>
     </application>
 
 </manifest>
