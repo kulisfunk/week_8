@@ -11,6 +11,7 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import static com.example.goober.topdrumpfs.AndroidDatabaseManager.indexInfo.index;
 import static com.example.goober.topdrumpfs.R.id.firepower;
 import static com.example.goober.topdrumpfs.R.id.range;
 import static com.example.goober.topdrumpfs.R.id.speed;
@@ -233,11 +234,11 @@ public class DBHelper extends SQLiteOpenHelper {
             cursor.close();
         return cards;
     }
-    public ArrayList<Plane> singlePlane(int index) {
+    public ArrayList<Plane> singlePlane(Integer index) {
         ArrayList<Plane> card = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
 //        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
-        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id WHERE id = ?", null);
+        Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id WHERE planes.id = " + index, null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
             String name = cursor.getString(cursor.getColumnIndex(PLANES_COLUMN_NAME));

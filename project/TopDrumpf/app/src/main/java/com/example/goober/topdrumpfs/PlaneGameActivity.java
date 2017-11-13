@@ -17,6 +17,7 @@ import java.util.List;
 import static android.R.attr.country;
 import static android.R.attr.x;
 import static android.media.CamcorderProfile.get;
+import static com.example.goober.topdrumpfs.AndroidDatabaseManager.indexInfo.index;
 import static com.example.goober.topdrumpfs.R.id.firepower;
 import static com.example.goober.topdrumpfs.R.id.max_takeoff;
 import static com.example.goober.topdrumpfs.R.id.wing;
@@ -81,20 +82,28 @@ public class PlaneGameActivity extends AppCompatActivity {
         if (i.hasExtra("playerPlanes")) {
             playerPlanes = new ArrayList<>();
             computerPlanes = new ArrayList<>();
+            playerCards = new ArrayList<>();
+            computerCards = new ArrayList<>();
+
             playerPlanes = extras.getIntegerArrayList("playerPlanes");
             computerPlanes = extras.getIntegerArrayList("computerPlanes");
 
 
-            for (int index = 0; index < playerPlanes.size(); index++) {
+            for (Integer index = 0; index < playerPlanes.size(); index++) {
                 DBHelper db = new DBHelper(this);
-                playerCards.add(db.singlePlane(index).remove(0));
+                Integer selector = playerPlanes.get(index);
+
+                Plane single = db.singlePlane(selector).remove(0);
+                playerCards.add(single);
 
             }
-            for (int index = 0; index < computerPlanes.size(); index++) {
+            for (Integer index = 0; index < computerPlanes.size(); index++) {
                 DBHelper db = new DBHelper(this);
-                computerCards.add(db.singlePlane(index).remove(0));
-
+                Integer selector = computerPlanes.get(index);
+                Plane single = db.singlePlane(selector).remove(0);
+                computerCards.add(single);
             }
+            currentHand = new ArrayList<>();
         }
 
         currentHand.add(pickPlayerCard());
