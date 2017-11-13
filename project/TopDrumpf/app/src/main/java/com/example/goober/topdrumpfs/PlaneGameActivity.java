@@ -16,6 +16,7 @@ import java.util.List;
 
 import static android.R.attr.country;
 import static android.R.attr.x;
+import static android.media.CamcorderProfile.get;
 import static com.example.goober.topdrumpfs.R.id.firepower;
 import static com.example.goober.topdrumpfs.R.id.max_takeoff;
 import static com.example.goober.topdrumpfs.R.id.wing;
@@ -33,36 +34,36 @@ public class PlaneGameActivity extends AppCompatActivity {
     TextView firepowerTV;
     ImageView planeImageIV;
     ImageView flagImageIV;
+    String winner;
+    String loser;
+    String winAttr;
+    String loseAttr;
+    String victor;
+
 
     Bundle extras;
     ArrayList<Plane> playerCards;
     ArrayList<Plane> computerCards;
     ArrayList<Plane> currentHand;
     ArrayList<Plane> pile;
-    boolean newGame;
+    String newGame;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plane_game);
-        newGame = true;
 
         Intent i = getIntent();
         Bundle extras = i.getExtras();
 
-//        if (i.hasExtra("playerCards")) {
-//
-//            playerCards = (ArrayList<Plane>) getIntent().getBundleExtra("arrays").getSerializable("playerCards");
-//            computerCards = (ArrayList<Plane>) getIntent().getBundleExtra("arrays").getSerializable("computerCards");
-//            currentHand = (ArrayList<Plane>) getIntent().getBundleExtra("arrays").getSerializable("currentCards");
-//        }else{
+
         if(i.hasExtra("game")){
-                newGame = extras.getBoolean("game");
+                newGame = extras.getString("game");
             }
 
 
 
-        if (newGame == true) {
+        if (newGame.equals("true")) {
             DBHelper dbHelper = new DBHelper(this);
             computerCards = new ArrayList<>();
             currentHand = new ArrayList<>();
@@ -78,16 +79,16 @@ public class PlaneGameActivity extends AppCompatActivity {
         currentHand.add(pickComputerCard());
 
 
-        String name = playerCards.get(0).name;
-        String nickname = playerCards.get(0).nickname;
-        String year = playerCards.get(0).year;
-        String country = playerCards.get(0).plane_country;
-        String speed = playerCards.get(0).speed.toString();
-        String height = playerCards.get(0).height.toString();
-        String range = playerCards.get(0).range.toString();
-        String max_takeoff = playerCards.get(0).max_takeoff.toString();
-        String wing = playerCards.get(0).wing.toString();
-        String firepower = playerCards.get(0).firepower.toString();
+        String name = currentHand.get(0).name;
+        String nickname = currentHand.get(0).nickname;
+        String year = currentHand.get(0).year;
+        String country = currentHand.get(0).plane_country;
+        String speed = currentHand.get(0).speed.toString();
+        String height = currentHand.get(0).height.toString();
+        String range = currentHand.get(0).range.toString();
+        String max_takeoff = currentHand.get(0).max_takeoff.toString();
+        String wing = currentHand.get(0).wing.toString();
+        String firepower = currentHand.get(0).firepower.toString();
 
         nameTV = (TextView) findViewById(R.id.name);
         nicknameTV = (TextView) findViewById(R.id.nickname);
@@ -139,20 +140,31 @@ public class PlaneGameActivity extends AppCompatActivity {
     public void onClickButtonSpeed(View button){
 
         if (currentHand.get(0).speed > currentHand.get(1).speed){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).speed.toString();
+            loseAttr = currentHand.get(1).speed.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).speed.toString();
+            loseAttr = currentHand.get(0).speed.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "speed");
+        i.putExtra("victor", victor);
         startActivity(i);
 
     }
@@ -181,14 +193,14 @@ public class PlaneGameActivity extends AppCompatActivity {
     public void onClickButtonHeight(View button){
 
         if (currentHand.get(0).height > currentHand.get(1).height){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
             playerCards.addAll(currentHand);
             currentHand.clear();
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
             computerCards.addAll(currentHand);
             currentHand.clear();
         }

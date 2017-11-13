@@ -243,7 +243,7 @@
         android:layout_height="20dp"
         android:layout_marginRight="53dp"
         android:layout_marginTop="240dp"
-        android:onClick="onClickButton"
+        android:onClick="onClickButtonSpeed"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flag_image" />
 

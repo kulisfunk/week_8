@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button planeButton;
-    boolean newGame = true;
+    String newGame = "true";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
