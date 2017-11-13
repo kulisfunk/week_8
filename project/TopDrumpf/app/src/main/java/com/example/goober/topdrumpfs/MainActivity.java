@@ -16,6 +16,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button planeButton;
+    boolean newGame = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
     public void onPlaneButtonClicked(View button){
 
         Intent i = new Intent(this, PlaneGameActivity.class);
+        i.putExtra("game", newGame);
         startActivity(i);
 
     }

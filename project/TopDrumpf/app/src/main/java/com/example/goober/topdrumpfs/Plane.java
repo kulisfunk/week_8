@@ -1,10 +1,14 @@
 package com.example.goober.topdrumpfs;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 /**
  * Created by goober on 10/11/2017.
  */
 
-public class Plane {
+public class Plane implements Serializable{
 
     Integer id;
     String name;
@@ -60,6 +64,7 @@ public class Plane {
         this.weight5 = weight5;
         this.weight6 = weight6;
     }
+
 
     public Integer getId() {
         return id;
