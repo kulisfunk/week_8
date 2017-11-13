@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class ResultActivity extends AppCompatActivity {
 
     Bundle extras;
@@ -25,15 +27,20 @@ public class ResultActivity extends AppCompatActivity {
     ImageView loseImageIV;
 
 
-//    ArrayList<Plane> playerCards;
-//    ArrayList<Plane> computerCards;
-//    ArrayList<Plane> currentCards;
+    ArrayList<Integer> playerPlanes;
+    ArrayList<Integer> computerPlanes;
+    ArrayList<Plane> currentCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         extras = getIntent().getExtras();
+
+        playerPlanes = extras.getIntegerArrayList("playerPlanes");
+        computerPlanes = extras.getIntegerArrayList("computerPlanes");
+
+
         winner = extras.getString("winner");
         loser = extras.getString("loser");
         winAttr = Integer.parseInt(extras.getString("winAttr"));
@@ -72,6 +79,8 @@ public class ResultActivity extends AppCompatActivity {
     public void onClickContinue(View button){
         Intent i = new Intent(this, PlaneGameActivity.class);
         i.putExtra("game", "false");
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         startActivity(i);
 
     }

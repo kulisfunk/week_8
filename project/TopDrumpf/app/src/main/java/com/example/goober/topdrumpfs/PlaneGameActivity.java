@@ -45,7 +45,9 @@ public class PlaneGameActivity extends AppCompatActivity {
     ArrayList<Plane> playerCards;
     ArrayList<Plane> computerCards;
     ArrayList<Plane> currentHand;
-    ArrayList<Plane> pile;
+    ArrayList<Integer> playerPlanes;
+    ArrayList<Integer> computerPlanes;
+
     String newGame;
 
     @Override
@@ -67,7 +69,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             DBHelper dbHelper = new DBHelper(this);
             computerCards = new ArrayList<>();
             currentHand = new ArrayList<>();
-            pile = new ArrayList<>();
             playerCards = dbHelper.allPlanes();
             Collections.shuffle(playerCards);
             int length = playerCards.size() / 2 + (playerCards.size() % 2);
@@ -75,6 +76,27 @@ public class PlaneGameActivity extends AppCompatActivity {
                 computerCards.add(playerCards.remove(count));
             }
         }
+
+
+        if (i.hasExtra("playerPlanes")) {
+            playerPlanes = new ArrayList<>();
+            computerPlanes = new ArrayList<>();
+            playerPlanes = extras.getIntegerArrayList("playerPlanes");
+            computerPlanes = extras.getIntegerArrayList("computerPlanes");
+
+
+            for (int index = 0; index < playerPlanes.size(); index++) {
+                DBHelper db = new DBHelper(this);
+                playerCards.add(db.singlePlane(index).remove(0));
+
+            }
+            for (int index = 0; index < computerPlanes.size(); index++) {
+                DBHelper db = new DBHelper(this);
+                computerCards.add(db.singlePlane(index).remove(0));
+
+            }
+        }
+
         currentHand.add(pickPlayerCard());
         currentHand.add(pickComputerCard());
 
@@ -123,6 +145,23 @@ public class PlaneGameActivity extends AppCompatActivity {
 
     }
 
+    public ArrayList<Integer> putPlayerCardsIntoArray(){
+        playerPlanes = new ArrayList<>();
+        for (int i = 0 ; i < playerCards.size(); i++){
+            Integer planeId  = playerCards.get(i).id;
+            playerPlanes.add(planeId);
+        }
+        return playerPlanes;
+    }
+
+    public ArrayList<Integer> putComputerCardsIntoArray(){
+        computerPlanes = new ArrayList<>();
+        for (int i = 0 ; i < computerCards.size(); i++){
+            computerPlanes.add(computerCards.get(i).id);
+        }
+        return computerPlanes;
+    }
+
     public Plane pickPlayerCard(){
         if (playerCards.size() > 0);
         Plane currentCard = (Plane) playerCards.remove(0);
@@ -158,7 +197,12 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
