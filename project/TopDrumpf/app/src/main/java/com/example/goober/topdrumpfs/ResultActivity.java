@@ -66,7 +66,7 @@ public class ResultActivity extends AppCompatActivity {
         winNameTV.setText(victor + " " + winner.toUpperCase());
         winAttrTV.setText("With a " + choice + " of " + winAttr);
         loseNameTV.setText(loser.toUpperCase());
-        loseAttrTV.setText(choice + " of " + loseAttr);
+        loseAttrTV.setText("With a " + choice + " of " + loseAttr);
 
 
 
