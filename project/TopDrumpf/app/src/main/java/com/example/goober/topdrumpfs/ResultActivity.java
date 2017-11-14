@@ -26,11 +26,12 @@ public class ResultActivity extends AppCompatActivity {
     TextView loseAttrTV;
     ImageView winImageIV;
     ImageView loseImageIV;
+    Boolean winStatus;
+    String computerTurn;
 
 
     ArrayList<Integer> playerPlanes;
     ArrayList<Integer> computerPlanes;
-    ArrayList<Plane> currentCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,7 @@ public class ResultActivity extends AppCompatActivity {
         loseAttr = Integer.parseInt(extras.getString("loseAttr"));
         choice = extras.getString("choice");
         victor = extras.getString("victor");
+        computerTurn = extras.getString("computerTurn");
 
         winNameTV = (TextView) findViewById(R.id.win_name);
         winAttrTV = (TextView) findViewById(R.id.win_attr);
@@ -78,11 +80,21 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void onClickContinue(View button){
-        Intent i = new Intent(this, PlaneGameActivity.class);
-        i.putExtra("game", "false");
-        i.putExtra("playerPlanes", playerPlanes);
-        i.putExtra("computerPlanes", computerPlanes);
-        startActivity(i);
+        winCheck();
+        if (winStatus) {
+            winner();
+            Intent i = new Intent(this, WinnerActivity.class);
+            i.putExtra("winner", winner);
+            startActivity(i);
+        }else {
+
+            Intent i = new Intent(this, PlaneGameActivity.class);
+            i.putExtra("game", "false");
+            i.putExtra("playerPlanes", playerPlanes);
+            i.putExtra("computerPlanes", computerPlanes);
+            i.putExtra("computerTurn", computerTurn);
+            startActivity(i);
+        }
 
     }
 
@@ -90,4 +102,23 @@ public class ResultActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
+    public void winCheck(){
+        if ((playerPlanes.size() == 32) || (computerPlanes.size() == 32)){
+            winStatus = true;
+        }
+        else {
+            winStatus = false;
+        }
+    }
+
+    public void winner(){
+        if (playerPlanes.size() == 32){
+            winner = "You";
+        }
+        else {
+            winner = "Computer";
+        }
+    }
+
 }

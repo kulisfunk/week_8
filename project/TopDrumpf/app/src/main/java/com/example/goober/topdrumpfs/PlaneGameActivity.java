@@ -56,6 +56,8 @@ public class PlaneGameActivity extends AppCompatActivity {
     ArrayList<Plane> currentHand;
     ArrayList<Integer> playerPlanes;
     ArrayList<Integer> computerPlanes;
+    ArrayList<String> attributes;
+    String computerTurn;
 
     String newGame;
 
@@ -63,13 +65,22 @@ public class PlaneGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plane_game);
-
+        computerTurn = "false";
         Intent i = getIntent();
         Bundle extras = i.getExtras();
+        attributes = new ArrayList<>();
+        attributes.add("speed");
+        attributes.add("height");
+        attributes.add("range");
+        attributes.add("max_takeoff");
+        attributes.add("wing");
+        attributes.add("firepower");
+
 
 
         if(i.hasExtra("game")){
-                newGame = extras.getString("game");
+            newGame = extras.getString("game");
+
             }
 
 
@@ -99,28 +110,41 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerPlanes = extras.getIntegerArrayList("computerPlanes");
             playerCardAmount = Integer.toString(playerPlanes.size());
             computerCardAmount = Integer.toString(computerPlanes.size());
+            computerTurn = extras.getString("computerTurn");
+
+            recoverPlayerCards();
+            recoverComputerCards();
 
 
-            for (Integer index = 0; index < playerPlanes.size(); index++) {
-                DBHelper db = new DBHelper(this);
-                Integer selector = playerPlanes.get(index);
-
-                Plane single = db.singlePlane(selector).remove(0);
-                playerCards.add(single);
-
-            }
-            for (Integer index = 0; index < computerPlanes.size(); index++) {
-                DBHelper db = new DBHelper(this);
-                Integer selector = computerPlanes.get(index);
-                Plane single = db.singlePlane(selector).remove(0);
-                computerCards.add(single);
-            }
             currentHand = new ArrayList<>();
         }
 
 
         currentHand.add(pickPlayerCard());
         currentHand.add(pickComputerCard());
+
+        if (computerTurn.equals("true")) {
+            Integer index = currentHand.get(1).weight1;
+            if (index == 1) {
+                speedResult();
+            }
+            if (index == 2) {
+                heightResult();
+            }
+            if (index == 3) {
+                rangeResult();
+            }
+            if (index == 4) {
+                takeoffResult();
+            }
+            if (index == 5) {
+                wingResult();
+            }
+
+            if (index == 6) {
+                firepowerResult();
+            }
+        }
 
 
         String name = currentHand.get(0).name;
@@ -189,6 +213,25 @@ public class PlaneGameActivity extends AppCompatActivity {
         return computerPlanes;
     }
 
+    public void recoverPlayerCards(){
+        for (Integer index = 0; index < playerPlanes.size(); index++) {
+            DBHelper db = new DBHelper(this);
+            Integer selector = playerPlanes.get(index);
+
+            Plane single = db.singlePlane(selector).remove(0);
+            playerCards.add(single);
+        }
+    }
+
+    public void recoverComputerCards(){
+        for (Integer index = 0; index < computerPlanes.size(); index++) {
+            DBHelper db = new DBHelper(this);
+            Integer selector = computerPlanes.get(index);
+            Plane single = db.singlePlane(selector).remove(0);
+            computerCards.add(single);
+        }
+    }
+
     public Plane pickPlayerCard(){
         if (playerCards.size() > 0);
         Plane currentCard = (Plane) playerCards.remove(0);
@@ -203,8 +246,7 @@ public class PlaneGameActivity extends AppCompatActivity {
         return currentCard;
     }
 
-    public void onClickButtonSpeed(View button){
-
+    public void speedResult(){
         if (currentHand.get(0).speed > currentHand.get(1).speed){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -214,6 +256,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -223,6 +266,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -236,12 +280,12 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Speed");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
     }
 
-    public void onClickButtonRange(View button){
-
+    public void rangeResult(){
         if (currentHand.get(0).range > currentHand.get(1).range){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -251,6 +295,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -260,6 +305,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -273,12 +319,12 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Range");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
     }
 
-    public void onClickButtonHeight(View button){
-
+    public void heightResult(){
         if (currentHand.get(0).height > currentHand.get(1).height){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -288,6 +334,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -297,6 +344,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -310,12 +358,13 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Height");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
 
     }
 
-    public void onClickButtonTakeoff(View button){
+    public void takeoffResult(){
         if (currentHand.get(0).max_takeoff > currentHand.get(1).max_takeoff){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -325,6 +374,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -334,6 +384,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -347,12 +398,13 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Max Weight");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
 
     }
 
-    public void onClickButtonWing(View button){
+    public void wingResult(){
         if (currentHand.get(0).wing > currentHand.get(1).wing){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -362,6 +414,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -371,6 +424,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -384,12 +438,13 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Wing Span");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
 
     }
 
-    public void onClickButtonFirepower(View button){
+    public void firepowerResult(){
         if (currentHand.get(0).firepower > currentHand.get(1).firepower){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
@@ -399,6 +454,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             playerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Your ";
+            computerTurn = "false";
 
         }else{
             winner = currentHand.get(1).name;
@@ -408,6 +464,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards.addAll(currentHand);
             currentHand.clear();
             victor = "Computer's ";
+            computerTurn = "true";
         }
 
         playerPlanes = putPlayerCardsIntoArray();
@@ -421,9 +478,36 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loseAttr", loseAttr);
         i.putExtra("choice", "Firepower");
         i.putExtra("victor", victor);
+        i.putExtra("computerTurn", computerTurn);
         startActivity(i);
 
+    }
 
+    public void onClickButtonSpeed(View button){
+        speedResult();
+
+    }
+
+    public void onClickButtonRange(View button){
+        rangeResult();
+
+    }
+
+    public void onClickButtonHeight(View button){
+        heightResult();
+
+    }
+
+    public void onClickButtonTakeoff(View button){
+        takeoffResult();
+    }
+
+    public void onClickButtonWing(View button){
+        wingResult();
+    }
+
+    public void onClickButtonFirepower(View button){
+        firepowerResult();
     }
 }
 

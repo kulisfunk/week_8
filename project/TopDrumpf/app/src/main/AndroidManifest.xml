@@ -20,7 +20,8 @@
         <activity android:name=".ListActivity" />
         <activity android:name=".PlaneActivity" />
         <activity android:name=".PlaneGameActivity" />
-        <activity android:name=".ResultActivity"></activity>
+        <activity android:name=".ResultActivity" />
+        <activity android:name=".WinnerActivity"></activity>
     </application>
 
 </manifest>
