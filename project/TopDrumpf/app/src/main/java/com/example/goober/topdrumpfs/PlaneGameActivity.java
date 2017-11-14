@@ -216,7 +216,7 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "speed");
+        i.putExtra("choice", "Speed");
         i.putExtra("victor", victor);
         startActivity(i);
 
@@ -225,20 +225,36 @@ public class PlaneGameActivity extends AppCompatActivity {
     public void onClickButtonRange(View button){
 
         if (currentHand.get(0).range > currentHand.get(1).range){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).range.toString();
+            loseAttr = currentHand.get(1).range.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).range.toString();
+            loseAttr = currentHand.get(0).range.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "Range");
+        i.putExtra("victor", victor);
         startActivity(i);
 
     }
@@ -248,79 +264,147 @@ public class PlaneGameActivity extends AppCompatActivity {
         if (currentHand.get(0).height > currentHand.get(1).height){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).height.toString();
+            loseAttr = currentHand.get(1).height.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).height.toString();
+            loseAttr = currentHand.get(0).height.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "Height");
+        i.putExtra("victor", victor);
         startActivity(i);
+
 
     }
 
     public void onClickButtonTakeoff(View button){
         if (currentHand.get(0).max_takeoff > currentHand.get(1).max_takeoff){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).max_takeoff.toString();
+            loseAttr = currentHand.get(1).max_takeoff.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).max_takeoff.toString();
+            loseAttr = currentHand.get(0).max_takeoff.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "Max Weight");
+        i.putExtra("victor", victor);
         startActivity(i);
+
 
     }
 
     public void onClickButtonWing(View button){
         if (currentHand.get(0).wing > currentHand.get(1).wing){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).wing.toString();
+            loseAttr = currentHand.get(1).wing.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).wing.toString();
+            loseAttr = currentHand.get(0).wing.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "Wing Span");
+        i.putExtra("victor", victor);
         startActivity(i);
+
 
     }
 
     public void onClickButtonFirepower(View button){
         if (currentHand.get(0).firepower > currentHand.get(1).firepower){
-            String winner = currentHand.get(0).name;
-            String loser = currentHand.get(1).name;
+            winner = currentHand.get(0).name;
+            loser = currentHand.get(1).name;
+            winAttr = currentHand.get(0).firepower.toString();
+            loseAttr = currentHand.get(1).firepower.toString();
+
             playerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Your ";
 
         }else{
-            String winner = currentHand.get(1).name;
-            String loser = currentHand.get(0).name;
+            winner = currentHand.get(1).name;
+            loser = currentHand.get(0).name;
+            winAttr = currentHand.get(1).firepower.toString();
+            loseAttr = currentHand.get(0).firepower.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
+            victor = "Computer's ";
         }
+
+        playerPlanes = putPlayerCardsIntoArray();
+        computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
+        i.putExtra("playerPlanes", playerPlanes);
+        i.putExtra("computerPlanes", computerPlanes);
         i.putExtra("winner", winner);
         i.putExtra("loser", loser);
+        i.putExtra("winAttr", winAttr);
+        i.putExtra("loseAttr", loseAttr);
+        i.putExtra("choice", "Firepower");
+        i.putExtra("victor", victor);
         startActivity(i);
+
 
     }
 }
