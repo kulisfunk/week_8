@@ -18,9 +18,13 @@ import static android.R.attr.country;
 import static android.R.attr.x;
 import static android.media.CamcorderProfile.get;
 import static com.example.goober.topdrumpfs.AndroidDatabaseManager.indexInfo.index;
+import static com.example.goober.topdrumpfs.R.id.computers_cards;
 import static com.example.goober.topdrumpfs.R.id.firepower;
 import static com.example.goober.topdrumpfs.R.id.max_takeoff;
+import static com.example.goober.topdrumpfs.R.id.player_cards;
+import static com.example.goober.topdrumpfs.R.id.speed;
 import static com.example.goober.topdrumpfs.R.id.wing;
+import static com.example.goober.topdrumpfs.R.id.year;
 
 public class PlaneGameActivity extends AppCompatActivity {
 
@@ -35,11 +39,15 @@ public class PlaneGameActivity extends AppCompatActivity {
     TextView firepowerTV;
     ImageView planeImageIV;
     ImageView flagImageIV;
+    TextView playerCardsTV;
+    TextView computerCardTV;
     String winner;
     String loser;
     String winAttr;
     String loseAttr;
     String victor;
+    String playerCardAmount;
+    String computerCardAmount;
 
 
     Bundle extras;
@@ -71,6 +79,8 @@ public class PlaneGameActivity extends AppCompatActivity {
             computerCards = new ArrayList<>();
             currentHand = new ArrayList<>();
             playerCards = dbHelper.allPlanes();
+            playerCardAmount = "16";
+            computerCardAmount = "16";
             Collections.shuffle(playerCards);
             int length = playerCards.size() / 2 + (playerCards.size() % 2);
             for (int count = 0; count < length; count++) {
@@ -87,6 +97,8 @@ public class PlaneGameActivity extends AppCompatActivity {
 
             playerPlanes = extras.getIntegerArrayList("playerPlanes");
             computerPlanes = extras.getIntegerArrayList("computerPlanes");
+            playerCardAmount = Integer.toString(playerPlanes.size());
+            computerCardAmount = Integer.toString(computerPlanes.size());
 
 
             for (Integer index = 0; index < playerPlanes.size(); index++) {
@@ -106,6 +118,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand = new ArrayList<>();
         }
 
+
         currentHand.add(pickPlayerCard());
         currentHand.add(pickComputerCard());
 
@@ -121,6 +134,7 @@ public class PlaneGameActivity extends AppCompatActivity {
         String wing = currentHand.get(0).wing.toString();
         String firepower = currentHand.get(0).firepower.toString();
 
+
         nameTV = (TextView) findViewById(R.id.name);
         nicknameTV = (TextView) findViewById(R.id.nickname);
         yearTV = (TextView) findViewById(R.id.year);
@@ -130,6 +144,8 @@ public class PlaneGameActivity extends AppCompatActivity {
         max_takeoffTV = (TextView) findViewById(R.id.max_takeoff);
         wingTV = (TextView) findViewById(R.id.wing);
         firepowerTV = (TextView) findViewById(R.id.firepower);
+        playerCardsTV = (TextView) findViewById(player_cards);
+        computerCardTV = (TextView) findViewById(computers_cards);
 
         planeImageIV = (ImageView) findViewById(R.id.plane_image);
         String planeImage = name.toLowerCase();
@@ -150,6 +166,8 @@ public class PlaneGameActivity extends AppCompatActivity {
         max_takeoffTV.setText(max_takeoff);
         wingTV.setText(wing);
         firepowerTV.setText(firepower);
+        playerCardsTV.setText(playerCardAmount);
+        computerCardTV.setText(computerCardAmount);
 
 
     }

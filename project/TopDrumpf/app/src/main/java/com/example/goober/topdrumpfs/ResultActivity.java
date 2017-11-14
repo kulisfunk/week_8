@@ -1,5 +1,6 @@
 package com.example.goober.topdrumpfs;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
@@ -83,5 +84,10 @@ public class ResultActivity extends AppCompatActivity {
         i.putExtra("computerPlanes", computerPlanes);
         startActivity(i);
 
+    }
+
+    public void onClickExit(View button) {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }
