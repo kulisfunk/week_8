@@ -1,16 +1,13 @@
 package com.example.goober.topdrumpfs;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,26 +25,6 @@ public class MainActivity extends AppCompatActivity {
         dbHelper.checkPlanestatsDatabase();
 
         planeButton = (Button) findViewById(R.id.planeBtn);
-
-        TextView tv =(TextView)findViewById(R.id.db_info);
-
-        tv.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent dbmanager = new Intent(MainActivity.this, AndroidDatabaseManager.class);
-                startActivity(dbmanager);
-            }
-        });
-
-        Button button =(Button)findViewById(R.id.db_button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-
-                Intent dbmanager = new Intent(MainActivity.this, AndroidDatabaseManager.class);
-                startActivity(dbmanager);
-            }
-        });
 
 
     }

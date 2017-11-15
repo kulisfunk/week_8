@@ -58,8 +58,8 @@ public class ResultActivity extends AppCompatActivity {
         choice = extras.getString("choice");
         victor = extras.getString("victor");
         computerTurn = extras.getString("computerTurn");
-        playerCardAmount = Integer.toString(playerPlanes.size());
-        computerCardAmount = Integer.toString(computerPlanes.size());
+        playerCardAmount = (Integer.toString(playerPlanes.size()));
+        computerCardAmount = (Integer.toString(computerPlanes.size()));
 
         winNameTV = (TextView) findViewById(R.id.win_name);
         winAttrTV = (TextView) findViewById(R.id.win_attr);

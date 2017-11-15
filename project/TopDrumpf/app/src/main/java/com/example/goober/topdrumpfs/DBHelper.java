@@ -11,11 +11,6 @@ import android.util.Log;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import static com.example.goober.topdrumpfs.AndroidDatabaseManager.indexInfo.index;
-import static com.example.goober.topdrumpfs.R.id.firepower;
-import static com.example.goober.topdrumpfs.R.id.range;
-import static com.example.goober.topdrumpfs.R.id.speed;
-import static com.example.goober.topdrumpfs.R.id.wing;
 
 
 /**
@@ -50,11 +45,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String PLANESTATS_COLUMN_WING = "wing";
     public static final String PLANESTATS_COLUMN_FIREPOWER = "firepower";
     public static final String PLANESTATS_COLUMN_WEIGHT1 = "weight1";
-    public static final String PLANESTATS_COLUMN_WEIGHT2 = "weight2";
-    public static final String PLANESTATS_COLUMN_WEIGHT3 = "weight3";
-    public static final String PLANESTATS_COLUMN_WEIGHT4 = "weight4";
-    public static final String PLANESTATS_COLUMN_WEIGHT5 = "weight5";
-    public static final String PLANESTATS_COLUMN_WEIGHT6 = "weight6";
 
     public static final String CARSTATS_TABLE_NAME = "carstats";
     public static final String CARSTATS_COLUMN_ID = "id";
@@ -66,11 +56,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String CARSTATS_COLUMN_CYLINDERS = "cylinders";
     public static final String CARSTATS_COLUMN_LENGTH = "length";
     public static final String CARSTATS_COLUMN_WEIGHT1 = "weight1";
-    public static final String CARSTATS_COLUMN_WEIGHT2 = "weight2";
-    public static final String CARSTATS_COLUMN_WEIGHT3 = "weight3";
-    public static final String CARSTATS_COLUMN_WEIGHT4 = "weight4";
-    public static final String CARSTATS_COLUMN_WEIGHT5 = "weight5";
-    public static final String CARSTATS_COLUMN_WEIGHT6 = "weight6";
 
 
 
@@ -78,52 +63,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 4);
+        super(context, DATABASE_NAME, null, 6);
     }
 
-    public ArrayList<Cursor> getData(String Query) throws SQLException {
-        //get writable database
-        SQLiteDatabase sqlDB = this.getWritableDatabase();
-        String[] columns = new String[] { "message" };
-        //an array list of cursor to save two cursors one has results from the query
-        //other cursor stores error message if any errors are triggered
-        ArrayList<Cursor> alc = new ArrayList<Cursor>(2);
-        MatrixCursor Cursor2= new MatrixCursor(columns);
-        alc.add(null);
-        alc.add(null);
-
-        try{
-            String maxQuery = Query ;
-            //execute the query results will be save in Cursor c
-            Cursor c = sqlDB.rawQuery(maxQuery, null);
-
-            //add value to cursor2
-            Cursor2.addRow(new Object[] { "Success" });
-
-            alc.set(1,Cursor2);
-            if (null != c && c.getCount() > 0) {
-
-                alc.set(0,c);
-                c.moveToFirst();
-
-                return alc ;
-            }
-            return alc;
-        } catch(Exception ex){
-            Log.d("printing exception", ex.getMessage());
-
-            //if any exceptions are triggered save the error message to cursor an return the arraylist
-            Cursor2.addRow(new Object[] { ""+ex.getMessage() });
-            alc.set(1,Cursor2);
-            return alc;
-        }
-    }
 
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE " + PLANES_TABLE_NAME + "(id INTEGER primary key autoincrement, name TEXT, nickname TEXT, year TEXT, plane_country TEXT)");
         db.execSQL("CREATE TABLE " + CARS_TABLE_NAME + "(id INTEGER primary key autoincrement, make TEXT, model TEXT, year TEXT, car_country TEXT)");
-        db.execSQL("CREATE TABLE " + PLANESTATS_TABLE_NAME + "(id INTEGER primary key autoincrement,  plane_id INTEGER, speed INTEGER, height INTEGER, range INTEGER, max_takeoff INTEGER, wing INTEGER, firepower INTEGER, weight1 INTEGER, weight2 INTEGER, weight3 INTEGER, weight4 INTEGER, weight5 INTEGER, weight6 INTEGER, FOREIGN KEY (plane_id) REFERENCES planes (id) ON DELETE CASCADE ON UPDATE NO ACTION)");
-        db.execSQL("CREATE TABLE " + CARSTATS_TABLE_NAME + "(id INTEGER primary key autoincrement, car_id INTEGER, speed INTEGER, accel INTEGER, power INTEGER, capacity INTEGER, cylinders INTEGER, length INTEGER, weight1 INTEGER, weight2 INTEGER, weight3 INTEGER, weight4 INTEGER, weight5 INTEGER, weight6 INTEGER, FOREIGN KEY (car_id) REFERENCES cars (id) ON DELETE CASCADE ON UPDATE NO ACTION)");
+        db.execSQL("CREATE TABLE " + PLANESTATS_TABLE_NAME + "(id INTEGER primary key autoincrement,  plane_id INTEGER, speed INTEGER, height INTEGER, range INTEGER, max_takeoff INTEGER, wing INTEGER, firepower INTEGER, weight1 INTEGER, FOREIGN KEY (plane_id) REFERENCES planes (id) ON DELETE CASCADE ON UPDATE NO ACTION)");
+        db.execSQL("CREATE TABLE " + CARSTATS_TABLE_NAME + "(id INTEGER primary key autoincrement, car_id INTEGER, speed INTEGER, accel INTEGER, power INTEGER, capacity INTEGER, cylinders INTEGER, length INTEGER, weight1 INTEGER, FOREIGN KEY (car_id) REFERENCES cars (id) ON DELETE CASCADE ON UPDATE NO ACTION)");
     }
 
 
@@ -147,7 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean savePlanestats(Integer plane_id, Integer speed, Integer height, Integer range, Integer max_takeoff, Integer wing, Integer firepower, Integer weight1, Integer weight2, Integer weight3, Integer weight4, Integer weight5, Integer weight6){
+    public boolean savePlanestats(Integer plane_id, Integer speed, Integer height, Integer range, Integer max_takeoff, Integer wing, Integer firepower, Integer weight1){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PLANESTATS_COLUMN_PLANEID, plane_id);
@@ -158,11 +106,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(PLANESTATS_COLUMN_WING, wing);
         contentValues.put(PLANESTATS_COLUMN_FIREPOWER, firepower);
         contentValues.put(PLANESTATS_COLUMN_WEIGHT1, weight1);
-        contentValues.put(PLANESTATS_COLUMN_WEIGHT2, weight2);
-        contentValues.put(PLANESTATS_COLUMN_WEIGHT3, weight3);
-        contentValues.put(PLANESTATS_COLUMN_WEIGHT4, weight4);
-        contentValues.put(PLANESTATS_COLUMN_WEIGHT5, weight5);
-        contentValues.put(PLANESTATS_COLUMN_WEIGHT6, weight6);
         db.insert(PLANESTATS_TABLE_NAME, null, contentValues);
 
         return true;
@@ -180,7 +123,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean saveCarstats(Integer plane_id, Integer speed, Integer accel, Integer power, Integer capacity, Integer cylinders, Integer length, Integer weight1, Integer weight2, Integer weight3, Integer weight4, Integer weight5, Integer weight6){
+    public boolean saveCarstats(Integer plane_id, Integer speed, Integer accel, Integer power, Integer capacity, Integer cylinders, Integer length, Integer weight1){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(CARSTATS_COLUMN_CARID, plane_id);
@@ -191,11 +134,6 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(CARSTATS_COLUMN_CYLINDERS, cylinders);
         contentValues.put(CARSTATS_COLUMN_LENGTH, length);
         contentValues.put(CARSTATS_COLUMN_WEIGHT1, weight1);
-        contentValues.put(CARSTATS_COLUMN_WEIGHT2, weight2);
-        contentValues.put(CARSTATS_COLUMN_WEIGHT3, weight3);
-        contentValues.put(CARSTATS_COLUMN_WEIGHT4, weight4);
-        contentValues.put(CARSTATS_COLUMN_WEIGHT5, weight5);
-        contentValues.put(CARSTATS_COLUMN_WEIGHT6, weight6);
         db.insert(CARSTATS_TABLE_NAME, null, contentValues);
 
         return true;
@@ -204,7 +142,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<Plane> allPlanes() {
         ArrayList<Plane> cards = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
         Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id", null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
@@ -219,25 +156,18 @@ public class DBHelper extends SQLiteOpenHelper {
             Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
             Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
             Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
-            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
-            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
-            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
-            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
-            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
 
-//            Plane plane = new Plane(id, name , nickname, year, plane_country) {
-
-            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
+            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1) {
             };
             cards.add(plane);
+
         }
-            cursor.close();
+        cursor.close();
         return cards;
     }
     public ArrayList<Plane> singlePlane(Integer index) {
         ArrayList<Plane> card = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + PLANES_TABLE_NAME, null);
         Cursor cursor = db.rawQuery("SELECT planes.*, planestats.* FROM " + PLANESTATS_TABLE_NAME + " INNER JOIN " + PLANES_TABLE_NAME + " ON planestats.plane_id = planes.id WHERE planes.id = " + index, null);
         while (cursor.moveToNext()) {
             Integer id = cursor.getInt(cursor.getColumnIndex(PLANES_COLUMN_ID));
@@ -252,15 +182,11 @@ public class DBHelper extends SQLiteOpenHelper {
             Integer wing = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WING));
             Integer firepower = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_FIREPOWER));
             Integer weight1 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT1));
-            Integer weight2 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT2));
-            Integer weight3 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT3));
-            Integer weight4 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT4));
-            Integer weight5 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT5));
-            Integer weight6 = cursor.getInt(cursor.getColumnIndex(PLANESTATS_COLUMN_WEIGHT6));
 
-            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1, weight2, weight3, weight4, weight5, weight6) {
+            Plane plane = new Plane(id, name , nickname, year, plane_country, speed, height, range, takeoff, wing, firepower, weight1) {
             };
             card.add(plane);
+
         }
         cursor.close();
         return card;
@@ -279,6 +205,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
             Car car = new Car(id, make, model, year, car_country);
             cards.add(car);
+
         }
         cursor.close();
         return cards;
@@ -343,38 +270,38 @@ public class DBHelper extends SQLiteOpenHelper {
         int icount = cursor.getInt(0);
         if (icount == 0) {
 
-            this.savePlanestats(1, 1600, 60000, 2448, 27900, 1170, 80, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(2, 1544, 50000, 1840, 33720, 1955, 60, 5, 0, 0, 0, 0, 0);
-            this.savePlanestats(3, 1650, 64900, 3450, 30845, 1305, 81, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(4, 1190, 51000, 2071, 23541, 1230, 91, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(5, 1490, 49000, 2650, 27986, 1391, 61, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(6, 1550, 62523, 2193, 30450, 1470, 82, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(7, 1300, 54000, 1270, 20752, 1060, 62, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(8, 1490, 59100, 1300, 18000, 1136, 70, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(9, 1550, 65000, 2350, 23500, 1095, 99, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(10, 662, 50500, 2015, 14061, 925, 9, 30, 0, 0, 0, 0, 0);
-            this.savePlanestats(11, 2170, 67915, 1390, 36720, 1401, 59, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(12, 1056, 45900, 2190, 15700, 868, 69, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(13, 667, 40000, 2300, 28000, 1341, 58, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(14, 1320, 65100, 2175, 35000, 1395, 93, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(15, 1500, 65000, 2000, 38000, 1356, 85, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(16, 1200, 49300, 1379, 31800, 1070, 100, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(17, 1492, 59055, 1150, 19277, 975, 76, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(18, 439, 45000, 2580, 23000, 1753, 98, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(19, 1188, 50200, 2000, 24500, 1080, 110, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(20, 1168, 60695, 1750, 17800, 1396, 63, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(21, 1370, 50300, 1983, 14000, 840, 83, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(22, 617, 45100, 1720, 23800, 1321, 109, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(23, 1450, 64800, 2790, 29000, 1330, 63, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(24, 1490, 62340, 1930, 29700, 1200, 90, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(25, 858, 50600, 1140, 5485, 770, 41, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(26, 1320, 50150, 2620, 19200, 996, 82, 3 ,0 ,0, 0, 0, 0);
-            this.savePlanestats(27, 481, 40400, 1382, 5215, 1123, 51, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(28, 1492, 60700, 2392, 20000, 1540, 73, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(29, 1386, 59100, 1242, 20000, 1060, 65, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(30, 668, 43000, 715, 5500, 856, 66, 2, 0 , 0, 0, 0, 0);
-            this.savePlanestats(31, 690, 42000, 1544, 19050, 1180, 87, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(32, 1528, 49990, 1630, 13166, 663, 65, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(1, 1600, 60000, 2448, 27900, 1170, 80, 3);
+            this.savePlanestats(2, 1544, 50000, 1840, 33720, 1955, 60, 5);
+            this.savePlanestats(3, 1650, 64900, 3450, 30845, 1305, 81, 3);
+            this.savePlanestats(4, 1190, 51000, 2071, 23541, 1230, 91, 6);
+            this.savePlanestats(5, 1490, 49000, 2650, 27986, 1391, 61, 3);
+            this.savePlanestats(6, 1550, 62523, 2193, 30450, 1470, 82, 4);
+            this.savePlanestats(7, 1300, 54000, 1270, 20752, 1060, 62, 2);
+            this.savePlanestats(8, 1490, 59100, 1300, 18000, 1136, 70, 1);
+            this.savePlanestats(9, 1550, 65000, 2350, 23500, 1095, 99, 6);
+            this.savePlanestats(10, 662, 50500, 2015, 14061, 925, 90, 3);
+            this.savePlanestats(11, 2170, 67915, 1390, 36720, 1401, 59, 1);
+            this.savePlanestats(12, 1056, 45900, 2190, 15700, 868, 69, 3);
+            this.savePlanestats(13, 667, 40000, 2300, 28000, 1341, 58, 3);
+            this.savePlanestats(14, 1320, 65100, 2175, 35000, 1395, 93, 4);
+            this.savePlanestats(15, 1500, 65000, 2000, 38000, 1356, 85, 4);
+            this.savePlanestats(16, 1200, 49300, 1379, 31800, 1070, 100, 6);
+            this.savePlanestats(17, 1492, 59055, 1150, 19277, 975, 76, 1);
+            this.savePlanestats(18, 439, 45000, 2580, 23000, 1753, 98, 6);
+            this.savePlanestats(19, 1188, 50200, 2000, 24500, 1080, 110, 6);
+            this.savePlanestats(20, 1168, 60695, 1750, 17800, 1396, 63, 2);
+            this.savePlanestats(21, 1370, 50300, 1983, 14000, 840, 83, 1);
+            this.savePlanestats(22, 617, 45100, 1720, 23800, 1321, 109, 6);
+            this.savePlanestats(23, 1450, 64800, 2790, 29000, 1330, 63, 2);
+            this.savePlanestats(24, 1490, 62340, 1930, 29700, 1200, 90, 1);
+            this.savePlanestats(25, 858, 50600, 1140, 5485, 770, 41, 2);
+            this.savePlanestats(26, 1320, 50150, 2620, 19200, 996, 82, 3);
+            this.savePlanestats(27, 481, 40400, 1382, 5215, 1123, 51, 3);
+            this.savePlanestats(28, 1492, 60700, 2392, 20000, 1540, 73, 1);
+            this.savePlanestats(29, 1386, 59100, 1242, 20000, 1060, 65, 1);
+            this.savePlanestats(30, 668, 43000, 715, 5500, 856, 66, 2);
+            this.savePlanestats(31, 690, 42000, 1544, 19050, 1180, 87, 6);
+            this.savePlanestats(32, 1528, 49990, 1630, 13166, 663, 65, 1);
         }
         cursor.close();
 

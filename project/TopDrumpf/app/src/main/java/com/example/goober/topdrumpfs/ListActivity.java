@@ -4,25 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_FIREPOWER;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_HEIGHT;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_MAXTAKEOFF;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_PLANEID;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_RANGE;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_SPEED;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT1;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT2;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT3;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT4;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT5;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WEIGHT6;
-import static com.example.goober.topdrumpfs.DBHelper.PLANESTATS_COLUMN_WING;
 
 public class ListActivity extends AppCompatActivity {
 
