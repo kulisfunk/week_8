@@ -117,7 +117,7 @@ public class ResultActivity extends AppCompatActivity {
             winner = "You";
         }
         else {
-            winner = "Computer";
+            winner = "Phone";
         }
     }
 

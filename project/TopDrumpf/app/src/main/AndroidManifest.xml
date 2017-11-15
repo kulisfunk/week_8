@@ -21,7 +21,7 @@
         <activity android:name=".PlaneActivity" />
         <activity android:name=".PlaneGameActivity" />
         <activity android:name=".ResultActivity" />
-        <activity android:name=".WinnerActivity"></activity>
+        <activity android:name=".WinnerActivity" />
     </application>
 
 </manifest>

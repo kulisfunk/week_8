@@ -48,6 +48,7 @@ public class PlaneGameActivity extends AppCompatActivity {
     String victor;
     String playerCardAmount;
     String computerCardAmount;
+    String choice;
 
 
     Bundle extras;
@@ -56,7 +57,6 @@ public class PlaneGameActivity extends AppCompatActivity {
     ArrayList<Plane> currentHand;
     ArrayList<Integer> playerPlanes;
     ArrayList<Integer> computerPlanes;
-    ArrayList<String> attributes;
     String computerTurn;
 
     String newGame;
@@ -67,15 +67,8 @@ public class PlaneGameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_plane_game);
         computerTurn = "false";
         Intent i = getIntent();
-        Bundle extras = i.getExtras();
-        attributes = new ArrayList<>();
-        attributes.add("speed");
-        attributes.add("height");
-        attributes.add("range");
-        attributes.add("max_takeoff");
-        attributes.add("wing");
-        attributes.add("firepower");
-
+        extras = i.getExtras();
+        currentHand = new ArrayList<>();
 
 
         if(i.hasExtra("game")){
@@ -116,7 +109,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             recoverComputerCards();
 
 
-            currentHand = new ArrayList<>();
+
         }
 
 
@@ -127,73 +120,66 @@ public class PlaneGameActivity extends AppCompatActivity {
             Integer index = currentHand.get(1).weight1;
             if (index == 1) {
                 speedResult();
-            }
-            if (index == 2) {
+            } else if (index == 2) {
                 heightResult();
-            }
-            if (index == 3) {
+            } else if (index == 3) {
                 rangeResult();
-            }
-            if (index == 4) {
+            } else if (index == 4) {
                 takeoffResult();
-            }
-            if (index == 5) {
+            } else if (index == 5) {
                 wingResult();
-            }
-
-            if (index == 6) {
+            } else if (index == 6) {
                 firepowerResult();
+            } else {
             }
+        }else{
+
+                String name = currentHand.get(0).name;
+                String nickname = currentHand.get(0).nickname;
+                String year = currentHand.get(0).year;
+                String country = currentHand.get(0).plane_country;
+                String speed = currentHand.get(0).speed.toString();
+                String height = currentHand.get(0).height.toString();
+                String range = currentHand.get(0).range.toString();
+                String max_takeoff = currentHand.get(0).max_takeoff.toString();
+                String wing = currentHand.get(0).wing.toString();
+                String firepower = currentHand.get(0).firepower.toString();
+
+
+                nameTV = (TextView) findViewById(R.id.name);
+                nicknameTV = (TextView) findViewById(R.id.nickname);
+                yearTV = (TextView) findViewById(R.id.year);
+                speedTV = (TextView) findViewById(R.id.speed);
+                heightTV = (TextView) findViewById(R.id.height);
+                rangeTV = (TextView) findViewById(R.id.range);
+                max_takeoffTV = (TextView) findViewById(R.id.max_takeoff);
+                wingTV = (TextView) findViewById(R.id.wing);
+                firepowerTV = (TextView) findViewById(R.id.firepower);
+                playerCardsTV = (TextView) findViewById(player_cards);
+                computerCardTV = (TextView) findViewById(computers_cards);
+
+                planeImageIV = (ImageView) findViewById(R.id.plane_image);
+                String planeImage = name.toLowerCase();
+                Drawable plane = getDrawable(getResources().getIdentifier(planeImage, "drawable", getPackageName()));
+                planeImageIV.setImageDrawable(plane);
+
+                flagImageIV = (ImageView) findViewById(R.id.flag_image);
+                String flagImage = country.toLowerCase();
+                Drawable flag = getDrawable(getResources().getIdentifier(flagImage, "drawable", getPackageName()));
+                flagImageIV.setImageDrawable(flag);
+
+                nameTV.setText(name.toUpperCase());
+                nicknameTV.setText(nickname);
+                yearTV.setText(year);
+                speedTV.setText(speed);
+                heightTV.setText(height);
+                rangeTV.setText(range);
+                max_takeoffTV.setText(max_takeoff);
+                wingTV.setText(wing);
+                firepowerTV.setText(firepower);
+                playerCardsTV.setText(playerCardAmount);
+                computerCardTV.setText(computerCardAmount);
         }
-
-
-        String name = currentHand.get(0).name;
-        String nickname = currentHand.get(0).nickname;
-        String year = currentHand.get(0).year;
-        String country = currentHand.get(0).plane_country;
-        String speed = currentHand.get(0).speed.toString();
-        String height = currentHand.get(0).height.toString();
-        String range = currentHand.get(0).range.toString();
-        String max_takeoff = currentHand.get(0).max_takeoff.toString();
-        String wing = currentHand.get(0).wing.toString();
-        String firepower = currentHand.get(0).firepower.toString();
-
-
-        nameTV = (TextView) findViewById(R.id.name);
-        nicknameTV = (TextView) findViewById(R.id.nickname);
-        yearTV = (TextView) findViewById(R.id.year);
-        speedTV = (TextView) findViewById(R.id.speed);
-        heightTV = (TextView) findViewById(R.id.height);
-        rangeTV = (TextView) findViewById(R.id.range);
-        max_takeoffTV = (TextView) findViewById(R.id.max_takeoff);
-        wingTV = (TextView) findViewById(R.id.wing);
-        firepowerTV = (TextView) findViewById(R.id.firepower);
-        playerCardsTV = (TextView) findViewById(player_cards);
-        computerCardTV = (TextView) findViewById(computers_cards);
-
-        planeImageIV = (ImageView) findViewById(R.id.plane_image);
-        String planeImage = name.toLowerCase();
-        Drawable plane = getDrawable(getResources().getIdentifier(planeImage, "drawable", getPackageName()));
-        planeImageIV.setImageDrawable(plane);
-
-        flagImageIV = (ImageView) findViewById(R.id.flag_image);
-        String flagImage = country.toLowerCase();
-        Drawable flag = getDrawable(getResources().getIdentifier(flagImage, "drawable", getPackageName()));
-        flagImageIV.setImageDrawable(flag);
-
-        nameTV.setText(name.toUpperCase());
-        nicknameTV.setText(nickname);
-        yearTV.setText(year);
-        speedTV.setText(speed);
-        heightTV.setText(height);
-        rangeTV.setText(range);
-        max_takeoffTV.setText(max_takeoff);
-        wingTV.setText(wing);
-        firepowerTV.setText(firepower);
-        playerCardsTV.setText(playerCardAmount);
-        computerCardTV.setText(computerCardAmount);
-
-
     }
 
     public ArrayList<Integer> putPlayerCardsIntoArray(){
@@ -263,12 +249,13 @@ public class PlaneGameActivity extends AppCompatActivity {
             loser = currentHand.get(0).name;
             winAttr = currentHand.get(1).speed.toString();
             loseAttr = currentHand.get(0).speed.toString();
+
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Speed";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -278,11 +265,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Speed");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
     }
 
     public void rangeResult(){
@@ -296,7 +282,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
-
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
@@ -304,10 +289,10 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).range.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Range";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -317,11 +302,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Range");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
     }
 
     public void heightResult(){
@@ -335,7 +319,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
-
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
@@ -343,10 +326,10 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).height.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Height";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -356,12 +339,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Height");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
-
     }
 
     public void takeoffResult(){
@@ -375,7 +356,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
-
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
@@ -383,10 +363,10 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).max_takeoff.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Max Weight";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -396,11 +376,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Max Weight");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
 
     }
 
@@ -415,7 +394,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
-
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
@@ -423,10 +401,10 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).wing.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Wing Span";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -436,11 +414,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Wing Span");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
 
     }
 
@@ -455,7 +432,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
-
         }else{
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
@@ -463,10 +439,10 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).firepower.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Computer's ";
+            victor = "Phone's";
             computerTurn = "true";
         }
-
+        choice = "Firepower";
         playerPlanes = putPlayerCardsIntoArray();
         computerPlanes = putComputerCardsIntoArray();
         Intent i = new Intent(this, ResultActivity.class);
@@ -476,11 +452,10 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("loser", loser);
         i.putExtra("winAttr", winAttr);
         i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", "Firepower");
+        i.putExtra("choice", choice);
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
-
     }
 
     public void onClickButtonSpeed(View button){
