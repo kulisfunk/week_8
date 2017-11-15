@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.goober.topdrumpfs.R.id.computer_cards;
+import static com.example.goober.topdrumpfs.R.id.computers_cards;
+import static com.example.goober.topdrumpfs.R.id.player_cards;
+
 public class ResultActivity extends AppCompatActivity {
 
     Bundle extras;
@@ -24,10 +28,14 @@ public class ResultActivity extends AppCompatActivity {
     TextView loseNameTV;
     TextView winAttrTV;
     TextView loseAttrTV;
+    TextView playerCardsTV;
+    TextView computerCardsTV;
     ImageView winImageIV;
     ImageView loseImageIV;
     Boolean winStatus;
     String computerTurn;
+    String playerCardAmount;
+    String computerCardAmount;
 
 
     ArrayList<Integer> playerPlanes;
@@ -50,11 +58,15 @@ public class ResultActivity extends AppCompatActivity {
         choice = extras.getString("choice");
         victor = extras.getString("victor");
         computerTurn = extras.getString("computerTurn");
+        playerCardAmount = Integer.toString(playerPlanes.size());
+        computerCardAmount = Integer.toString(computerPlanes.size());
 
         winNameTV = (TextView) findViewById(R.id.win_name);
         winAttrTV = (TextView) findViewById(R.id.win_attr);
         loseNameTV = (TextView) findViewById(R.id.lose_name);
         loseAttrTV = (TextView) findViewById(R.id.lose_attr);
+        playerCardsTV = (TextView) findViewById(player_cards);
+        computerCardsTV = (TextView) findViewById(computer_cards);
 
         winImageIV = (ImageView) findViewById(R.id.win_image);
         String winnerImage = winner.toLowerCase();
@@ -67,9 +79,12 @@ public class ResultActivity extends AppCompatActivity {
         loseImageIV.setImageDrawable(lose);
 
         winNameTV.setText(victor + " " + winner.toUpperCase());
-        winAttrTV.setText("With a " + choice + " of " + winAttr);
+        winAttrTV.setText(choice + " " + winAttr);
         loseNameTV.setText(loser.toUpperCase());
-        loseAttrTV.setText("With a " + choice + " of " + loseAttr);
+        loseAttrTV.setText(choice + " " + loseAttr);
+        playerCardsTV.setText(playerCardAmount);
+        computerCardsTV.setText(computerCardAmount);
+
 
 
 

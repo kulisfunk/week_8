@@ -78,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, 3);
+        super(context, DATABASE_NAME, null, 4);
     }
 
     public ArrayList<Cursor> getData(String Query) throws SQLException {
@@ -307,7 +307,7 @@ public class DBHelper extends SQLiteOpenHelper {
             this.savePlane("su27", "Flanker", "1977", "russia");
             this.savePlane("f1", "Lightning", "1954", "uk");
             this.savePlane("mig29", "Fulcrum", "1977", "russia");
-            this.savePlane("c16", "Typhoon", "1994", "uk");
+            this.savePlane("fgr4", "Typhoon", "1994", "uk");
             this.savePlane("gr7", "Harrier", "1985", "uk");
             this.savePlane("mig25", "Foxbat", "1970", "russia");
             this.savePlane("gr1", "Jaguar", "1968", "uk");
@@ -319,7 +319,7 @@ public class DBHelper extends SQLiteOpenHelper {
             this.savePlane("a10", "Thunderbolt", "1972", "usa");
             this.savePlane("d", "Rafale", "1991", "france");
             this.savePlane("mig23", "Flogger", "1967", "russia");
-            this.savePlane("jas39", "Grippen", "1978", "sweden");
+            this.savePlane("jas39", "Gripen", "1978", "sweden");
             this.savePlane("f117a", "Nighthawk", "1981", "usa");
             this.savePlane("yf23", "Blackwidow II", "1990", "usa");
             this.savePlane("mig35", "Fulcrum-F", "2007", "russia");
@@ -343,38 +343,38 @@ public class DBHelper extends SQLiteOpenHelper {
         int icount = cursor.getInt(0);
         if (icount == 0) {
 
-            this.savePlanestats(1, 1600, 60000, 2448, 27900, 12, 8, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(2, 1544, 50000, 1840, 33720, 19, 6, 5, 0, 0, 0, 0, 0);
-            this.savePlanestats(3, 1650, 65000, 3450, 30845, 13, 8, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(4, 1190, 50000, 2071, 23541, 12, 9, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(5, 1490, 50000, 2650, 27986, 14, 6, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(6, 1550, 62523, 2193, 30450, 15, 8, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(7, 1300, 54000, 1270, 20752, 11, 6, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(8, 1490, 59100, 1300, 18000, 11, 7, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(9, 1550, 65000, 2350, 23500, 11, 10, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(10, 662, 50000, 2015, 14061, 9, 9, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(11, 2170, 67915, 1390, 36720, 14, 6, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(12, 1056, 45900, 2190, 15700, 9, 7, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(13, 667, 40000, 2300, 28000, 13, 6, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(14, 1320, 65000, 2175, 35000, 14, 9, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(15, 1500, 65000, 2000, 38000, 14, 8, 4, 0, 0, 0, 0, 0);
-            this.savePlanestats(16, 1200, 50000, 1379, 31800, 11, 10, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(17, 1492, 59055, 1150, 19277, 10, 8, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(18, 439, 45000, 2580, 23000, 18, 10, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(19, 1188, 50000, 2000, 24500, 11, 11, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(20, 1168, 60695, 1750, 17800, 14, 6, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(21, 1370, 50000, 1983, 14000, 8, 8, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(22, 617, 45000, 1720, 23800, 13, 11, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(23, 1450, 65000, 2790, 29000, 13, 6, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(24, 1490, 62340, 1930, 29700, 12, 9, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(25, 858, 50000, 1140, 5485, 8, 4, 2, 0, 0, 0, 0, 0);
-            this.savePlanestats(26, 1320, 50000, 2620, 19200, 10, 8, 3 ,0 ,0, 0, 0, 0);
-            this.savePlanestats(27, 481, 40000, 1382, 5215, 11, 5, 3, 0, 0, 0, 0, 0);
-            this.savePlanestats(28, 1492, 60700, 2392, 20000, 15, 7, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(29, 1386, 59100, 1242, 20000, 11, 6, 1, 0, 0, 0, 0, 0);
-            this.savePlanestats(30, 668, 43000, 715, 5500, 9, 6, 2, 0 , 0, 0, 0, 0);
-            this.savePlanestats(31, 690, 42000, 1544, 19050, 12, 8, 6, 0, 0, 0, 0, 0);
-            this.savePlanestats(32, 1528, 50000, 1630, 13166, 7, 6, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(1, 1600, 60000, 2448, 27900, 1170, 80, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(2, 1544, 50000, 1840, 33720, 1955, 60, 5, 0, 0, 0, 0, 0);
+            this.savePlanestats(3, 1650, 64900, 3450, 30845, 1305, 81, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(4, 1190, 51000, 2071, 23541, 1230, 91, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(5, 1490, 49000, 2650, 27986, 1391, 61, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(6, 1550, 62523, 2193, 30450, 1470, 82, 4, 0, 0, 0, 0, 0);
+            this.savePlanestats(7, 1300, 54000, 1270, 20752, 1060, 62, 2, 0, 0, 0, 0, 0);
+            this.savePlanestats(8, 1490, 59100, 1300, 18000, 1136, 70, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(9, 1550, 65000, 2350, 23500, 1095, 99, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(10, 662, 50500, 2015, 14061, 925, 9, 30, 0, 0, 0, 0, 0);
+            this.savePlanestats(11, 2170, 67915, 1390, 36720, 1401, 59, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(12, 1056, 45900, 2190, 15700, 868, 69, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(13, 667, 40000, 2300, 28000, 1341, 58, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(14, 1320, 65100, 2175, 35000, 1395, 93, 4, 0, 0, 0, 0, 0);
+            this.savePlanestats(15, 1500, 65000, 2000, 38000, 1356, 85, 4, 0, 0, 0, 0, 0);
+            this.savePlanestats(16, 1200, 49300, 1379, 31800, 1070, 100, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(17, 1492, 59055, 1150, 19277, 975, 76, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(18, 439, 45000, 2580, 23000, 1753, 98, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(19, 1188, 50200, 2000, 24500, 1080, 110, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(20, 1168, 60695, 1750, 17800, 1396, 63, 2, 0, 0, 0, 0, 0);
+            this.savePlanestats(21, 1370, 50300, 1983, 14000, 840, 83, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(22, 617, 45100, 1720, 23800, 1321, 109, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(23, 1450, 64800, 2790, 29000, 1330, 63, 2, 0, 0, 0, 0, 0);
+            this.savePlanestats(24, 1490, 62340, 1930, 29700, 1200, 90, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(25, 858, 50600, 1140, 5485, 770, 41, 2, 0, 0, 0, 0, 0);
+            this.savePlanestats(26, 1320, 50150, 2620, 19200, 996, 82, 3 ,0 ,0, 0, 0, 0);
+            this.savePlanestats(27, 481, 40400, 1382, 5215, 1123, 51, 3, 0, 0, 0, 0, 0);
+            this.savePlanestats(28, 1492, 60700, 2392, 20000, 1540, 73, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(29, 1386, 59100, 1242, 20000, 1060, 65, 1, 0, 0, 0, 0, 0);
+            this.savePlanestats(30, 668, 43000, 715, 5500, 856, 66, 2, 0 , 0, 0, 0, 0);
+            this.savePlanestats(31, 690, 42000, 1544, 19050, 1180, 87, 6, 0, 0, 0, 0, 0);
+            this.savePlanestats(32, 1528, 49990, 1630, 13166, 663, 65, 1, 0, 0, 0, 0, 0);
         }
         cursor.close();
 

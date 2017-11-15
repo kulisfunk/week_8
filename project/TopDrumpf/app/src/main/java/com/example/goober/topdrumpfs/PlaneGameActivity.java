@@ -252,7 +252,7 @@ public class PlaneGameActivity extends AppCompatActivity {
 
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Speed";
@@ -289,7 +289,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).range.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Range";
@@ -326,7 +326,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).height.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Height";
@@ -363,7 +363,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).max_takeoff.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Max Weight";
@@ -401,7 +401,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).wing.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Wing Span";
@@ -439,7 +439,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             loseAttr = currentHand.get(0).firepower.toString();
             computerCards.addAll(currentHand);
             currentHand.clear();
-            victor = "Phone's";
+            victor = "Computer's";
             computerTurn = "true";
         }
         choice = "Firepower";
