@@ -38,8 +38,8 @@ public class ResultActivity extends AppCompatActivity {
     String computerCardAmount;
 
 
-    ArrayList<Integer> playerPlanes;
-    ArrayList<Integer> computerPlanes;
+    ArrayList<Integer> playerCards;
+    ArrayList<Integer> computerCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
         extras = getIntent().getExtras();
 
-        playerPlanes = extras.getIntegerArrayList("playerPlanes");
-        computerPlanes = extras.getIntegerArrayList("computerPlanes");
+        playerCards = extras.getIntegerArrayList("playerCards");
+        computerCards = extras.getIntegerArrayList("computerCards");
 
 
         winner = extras.getString("winner");
@@ -58,8 +58,8 @@ public class ResultActivity extends AppCompatActivity {
         choice = extras.getString("choice");
         victor = extras.getString("victor");
         computerTurn = extras.getString("computerTurn");
-        playerCardAmount = (Integer.toString(playerPlanes.size()));
-        computerCardAmount = (Integer.toString(computerPlanes.size()));
+        playerCardAmount = (Integer.toString(playerCards.size()));
+        computerCardAmount = (Integer.toString(computerCards.size()));
 
         winNameTV = (TextView) findViewById(R.id.win_name);
         winAttrTV = (TextView) findViewById(R.id.win_attr);
@@ -105,8 +105,8 @@ public class ResultActivity extends AppCompatActivity {
 
             Intent i = new Intent(this, PlaneGameActivity.class);
             i.putExtra("game", "false");
-            i.putExtra("playerPlanes", playerPlanes);
-            i.putExtra("computerPlanes", computerPlanes);
+            i.putExtra("playerCards", playerCards);
+            i.putExtra("computerCards", computerCards);
             i.putExtra("computerTurn", computerTurn);
             startActivity(i);
         }
@@ -119,7 +119,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void winCheck(){
-        if ((playerPlanes.size() == 32) || (computerPlanes.size() == 32)){
+        if ((playerCards.size() == 32) || (computerCards.size() == 32)){
             winStatus = true;
         }
         else {
@@ -128,7 +128,7 @@ public class ResultActivity extends AppCompatActivity {
     }
 
     public void winner(){
-        if (playerPlanes.size() == 32){
+        if (playerCards.size() == 32){
             winner = "You";
         }
         else {
