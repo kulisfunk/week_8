@@ -11,9 +11,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static android.media.CamcorderProfile.get;
 import static com.example.goober.topdrumpfs.R.id.computers_cards;
 import static com.example.goober.topdrumpfs.R.id.player_cards;
+import static com.example.goober.topdrumpfs.R.id.speed;
 
 
 public class PlaneGameActivity extends AppCompatActivity {
@@ -39,6 +39,7 @@ public class PlaneGameActivity extends AppCompatActivity {
     String playerCardAmount;
     String computerCardAmount;
     String choice;
+    String pack;
 
 
     Bundle extras;
@@ -109,16 +110,22 @@ public class PlaneGameActivity extends AppCompatActivity {
             Integer index = currentHand.get(1).weight1;
             if (index == 1) {
                 speedResult();
+                displayWin();
             } else if (index == 2) {
                 heightResult();
+                displayWin();
             } else if (index == 3) {
                 rangeResult();
+                displayWin();
             } else if (index == 4) {
                 takeoffResult();
+                displayWin();
             } else if (index == 5) {
                 wingResult();
+                displayWin();
             } else if (index == 6) {
                 firepowerResult();
+                displayWin();
             } else {
             }
         }else{
@@ -181,7 +188,7 @@ public class PlaneGameActivity extends AppCompatActivity {
             currentHand.add(single);
         }
     }
-    
+
 
     public void pickPlayerCard(){
         if (playerCards.size() > 0) {
@@ -195,30 +202,28 @@ public class PlaneGameActivity extends AppCompatActivity {
         }
     }
 
-    public void speedResult(){
-        if (currentHand.get(0).speed > currentHand.get(1).speed){
+    public void preparePlayerWin(){
             winner = currentHand.get(0).name;
             loser = currentHand.get(1).name;
-            winAttr = currentHand.get(0).speed.toString();
-            loseAttr = currentHand.get(1).speed.toString();
-
             playerCards.addAll(currentIds);
             currentHand.clear();
             victor = "Your ";
             computerTurn = "false";
+    }
 
-        }else{
+    public void prepareComputerWin(){
+
             winner = currentHand.get(1).name;
             loser = currentHand.get(0).name;
-            winAttr = currentHand.get(1).speed.toString();
-            loseAttr = currentHand.get(0).speed.toString();
-
             computerCards.addAll(currentIds);
             currentHand.clear();
             victor = "Computer's";
             computerTurn = "true";
         }
-        choice = "Speed";
+
+
+
+    public void displayWin(){
         Intent i = new Intent(this, ResultActivity.class);
         i.putExtra("playerCards", playerCards);
         i.putExtra("computerCards", computerCards);
@@ -230,210 +235,114 @@ public class PlaneGameActivity extends AppCompatActivity {
         i.putExtra("victor", victor);
         i.putExtra("computerTurn", computerTurn);
         startActivity(i);
+    }
+
+
+    public void speedResult(){
+        choice = "Speed";
+        if (currentHand.get(0).speed > currentHand.get(1).speed){
+            winAttr = currentHand.get(0).speed.toString();
+            loseAttr = currentHand.get(1).speed.toString();
+            preparePlayerWin();
+        }else {
+            winAttr = currentHand.get(1).speed.toString();
+            loseAttr = currentHand.get(0).speed.toString();
+            prepareComputerWin();
+        }
     }
 
     public void rangeResult(){
+        choice = "Range";
         if (currentHand.get(0).range > currentHand.get(1).range){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
             winAttr = currentHand.get(0).range.toString();
             loseAttr = currentHand.get(1).range.toString();
-
-            playerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Your ";
-            computerTurn = "false";
-        }else{
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            preparePlayerWin();
+        }else {
             winAttr = currentHand.get(1).range.toString();
             loseAttr = currentHand.get(0).range.toString();
-            computerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Computer's";
-            computerTurn = "true";
+            prepareComputerWin();
         }
-        choice = "Range";
-        Intent i = new Intent(this, ResultActivity.class);
-        i.putExtra("playerCards", playerCards);
-        i.putExtra("computerCards", computerCards);
-        i.putExtra("winner", winner);
-        i.putExtra("loser", loser);
-        i.putExtra("winAttr", winAttr);
-        i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", choice);
-        i.putExtra("victor", victor);
-        i.putExtra("computerTurn", computerTurn);
-        startActivity(i);
     }
 
     public void heightResult(){
+        choice = "Height";
         if (currentHand.get(0).height > currentHand.get(1).height){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
             winAttr = currentHand.get(0).height.toString();
             loseAttr = currentHand.get(1).height.toString();
-
-            playerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Your ";
-            computerTurn = "false";
-        }else{
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            preparePlayerWin();
+        }else {
             winAttr = currentHand.get(1).height.toString();
             loseAttr = currentHand.get(0).height.toString();
-            computerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Computer's";
-            computerTurn = "true";
+            prepareComputerWin();
         }
-        choice = "Height";
-        Intent i = new Intent(this, ResultActivity.class);
-        i.putExtra("playerCards", playerCards);
-        i.putExtra("computerCards", computerCards);
-        i.putExtra("winner", winner);
-        i.putExtra("loser", loser);
-        i.putExtra("winAttr", winAttr);
-        i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", choice);
-        i.putExtra("victor", victor);
-        i.putExtra("computerTurn", computerTurn);
-        startActivity(i);
     }
 
     public void takeoffResult(){
+        choice = "Max Takeoff";
         if (currentHand.get(0).max_takeoff > currentHand.get(1).max_takeoff){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
             winAttr = currentHand.get(0).max_takeoff.toString();
             loseAttr = currentHand.get(1).max_takeoff.toString();
-
-            playerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Your ";
-            computerTurn = "false";
-        }else{
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            preparePlayerWin();
+        }else {
             winAttr = currentHand.get(1).max_takeoff.toString();
             loseAttr = currentHand.get(0).max_takeoff.toString();
-            computerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Computer's";
-            computerTurn = "true";
+            prepareComputerWin();
         }
-        choice = "Max Weight";
-        Intent i = new Intent(this, ResultActivity.class);
-        i.putExtra("playerCards", playerCards);
-        i.putExtra("computerCards", computerCards);
-        i.putExtra("winner", winner);
-        i.putExtra("loser", loser);
-        i.putExtra("winAttr", winAttr);
-        i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", choice);
-        i.putExtra("victor", victor);
-        i.putExtra("computerTurn", computerTurn);
-        startActivity(i);
-
     }
 
     public void wingResult(){
+        choice = "Wing Span";
         if (currentHand.get(0).wing > currentHand.get(1).wing){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
             winAttr = currentHand.get(0).wing.toString();
             loseAttr = currentHand.get(1).wing.toString();
-
-            playerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Your ";
-            computerTurn = "false";
-        }else{
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            preparePlayerWin();
+        }else {
             winAttr = currentHand.get(1).wing.toString();
             loseAttr = currentHand.get(0).wing.toString();
-            computerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Computer's";
-            computerTurn = "true";
+            prepareComputerWin();
         }
-        choice = "Wing Span";
-        Intent i = new Intent(this, ResultActivity.class);
-        i.putExtra("playerCards", playerCards);
-        i.putExtra("computerCards", computerCards);
-        i.putExtra("winner", winner);
-        i.putExtra("loser", loser);
-        i.putExtra("winAttr", winAttr);
-        i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", choice);
-        i.putExtra("victor", victor);
-        i.putExtra("computerTurn", computerTurn);
-        startActivity(i);
-
     }
 
     public void firepowerResult(){
+        choice = "Firepower";
         if (currentHand.get(0).firepower > currentHand.get(1).firepower){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
             winAttr = currentHand.get(0).firepower.toString();
             loseAttr = currentHand.get(1).firepower.toString();
-
-            playerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Your ";
-            computerTurn = "false";
-        }else{
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            preparePlayerWin();
+        }else {
             winAttr = currentHand.get(1).firepower.toString();
             loseAttr = currentHand.get(0).firepower.toString();
-            computerCards.addAll(currentIds);
-            currentHand.clear();
-            victor = "Computer's";
-            computerTurn = "true";
+            prepareComputerWin();
         }
-        choice = "Firepower";
-        Intent i = new Intent(this, ResultActivity.class);
-        i.putExtra("playerCards", playerCards);
-        i.putExtra("computerCards", computerCards);
-        i.putExtra("winner", winner);
-        i.putExtra("loser", loser);
-        i.putExtra("winAttr", winAttr);
-        i.putExtra("loseAttr", loseAttr);
-        i.putExtra("choice", choice);
-        i.putExtra("victor", victor);
-        i.putExtra("computerTurn", computerTurn);
-        startActivity(i);
     }
 
-    public void onClickButtonSpeed(View button){
-        speedResult();
-
-    }
-
-    public void onClickButtonRange(View button){
-        rangeResult();
-
-    }
-
-    public void onClickButtonHeight(View button){
-        heightResult();
-
-    }
-
-    public void onClickButtonTakeoff(View button){
-        takeoffResult();
-    }
-
-    public void onClickButtonWing(View button){
-        wingResult();
-    }
-
-    public void onClickButtonFirepower(View button){
-        firepowerResult();
+    public void onClickButton(View button){
+        switch (button.getId()) {
+            case R.id.button1:
+                speedResult();
+                displayWin();
+                break;
+            case R.id.button2:
+                rangeResult();
+                displayWin();
+                break;
+            case R.id.button3:
+                heightResult();
+                displayWin();
+                break;
+            case R.id.button4:
+                takeoffResult();
+                displayWin();
+                break;
+            case R.id.button5:
+                wingResult();
+                displayWin();
+                break;
+            case R.id.button6:
+                firepowerResult();
+                displayWin();
+                break;
+        }
     }
 }
 

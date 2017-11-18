@@ -19,11 +19,6 @@ public class Car {
     Integer cylinders;
     Integer length;
     Integer weight1;
-    Integer weight2;
-    Integer weight3;
-    Integer weight4;
-    Integer weight5;
-    Integer weight6;
 
     public Car(String make, String model, String year, String car_country) {
         this.make = make;
@@ -40,7 +35,7 @@ public class Car {
         this.car_country = car_country;
     }
 
-    public Car(Integer id, String make, String model, String year, String car_country, Integer speed, Integer accel, Integer power, Integer capacity, Integer cylinders, Integer length, Integer weight1, Integer weight2, Integer weight3, Integer weight4, Integer weight5, Integer weight6) {
+    public Car(Integer id, String make, String model, String year, String car_country, Integer speed, Integer accel, Integer power, Integer capacity, Integer cylinders, Integer length, Integer weight1) {
         this.id = id;
         this.make = make;
         this.model = model;
@@ -54,11 +49,6 @@ public class Car {
         this.cylinders = cylinders;
         this.length = length;
         this.weight1 = weight1;
-        this.weight2 = weight2;
-        this.weight3 = weight3;
-        this.weight4 = weight4;
-        this.weight5 = weight5;
-        this.weight6 = weight6;
     }
 
     public Integer getId() {
