@@ -45,14 +45,14 @@ public class MainActivity extends AppCompatActivity {
 
 
             return true;
-        } else {
-            if (item.getItemId() == R.id.view_cars) {
-                Intent intent = new Intent(this, ListActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
+//        } else {
+//            if (item.getItemId() == R.id.view_cars) {
+//                Intent intent = new Intent(this, ListActivity.class);
+//                startActivity(intent);
+//                return true;
+//            }
+
+        }return super.onOptionsItemSelected(item);
     }
 
     public void getPlane(View listItem) {

@@ -13,7 +13,6 @@ import java.util.Collections;
 
 import static com.example.goober.topdrumpfs.R.id.computers_cards;
 import static com.example.goober.topdrumpfs.R.id.player_cards;
-import static com.example.goober.topdrumpfs.R.id.speed;
 
 
 public class PlaneGameActivity extends AppCompatActivity {
@@ -126,7 +125,6 @@ public class PlaneGameActivity extends AppCompatActivity {
             } else if (index == 6) {
                 firepowerResult();
                 displayWin();
-            } else {
             }
         }else{
 
