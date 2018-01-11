@@ -106,7 +106,7 @@ public class PlaneGameActivity extends AppCompatActivity {
         recoverCurrentCards();
 
         if (computerTurn.equals("true")) {
-            Integer index = currentHand.get(1).weight1;
+            Integer index = currentHand.get(1).getWeight1();
             if (index == 1) {
                 speedResult();
                 displayWin();
@@ -128,16 +128,16 @@ public class PlaneGameActivity extends AppCompatActivity {
             }
         }else{
 
-            String name = currentHand.get(0).name;
-            String nickname = currentHand.get(0).nickname;
-            String year = currentHand.get(0).year;
-            String country = currentHand.get(0).plane_country;
-            String speed = currentHand.get(0).speed.toString();
-            String height = currentHand.get(0).height.toString();
-            String range = currentHand.get(0).range.toString();
-            String max_takeoff = currentHand.get(0).max_takeoff.toString();
-            String wing = currentHand.get(0).wing.toString();
-            String firepower = currentHand.get(0).firepower.toString();
+            String name = currentHand.get(0).getFirst();
+            String nickname = currentHand.get(0).getSecond();
+            String year = currentHand.get(0).getThird();
+            String country = currentHand.get(0).getFourth();
+            String speed = currentHand.get(0).getSpeed().toString();
+            String height = currentHand.get(0).getHeight().toString();
+            String range = currentHand.get(0).getRange().toString();
+            String max_takeoff = currentHand.get(0).getMax_takeoff().toString();
+            String wing = currentHand.get(0).getWing().toString();
+            String firepower = currentHand.get(0).getFirepower().toString();
 
 
             nameTV = (TextView) findViewById(R.id.name);
@@ -201,8 +201,8 @@ public class PlaneGameActivity extends AppCompatActivity {
     }
 
     public void preparePlayerWin(){
-            winner = currentHand.get(0).name;
-            loser = currentHand.get(1).name;
+            winner = currentHand.get(0).getFirst();
+            loser = currentHand.get(1).getFirst();
             playerCards.addAll(currentIds);
             currentHand.clear();
             victor = "Your ";
@@ -211,8 +211,8 @@ public class PlaneGameActivity extends AppCompatActivity {
 
     public void prepareComputerWin(){
 
-            winner = currentHand.get(1).name;
-            loser = currentHand.get(0).name;
+            winner = currentHand.get(1).getFirst();
+            loser = currentHand.get(0).getFirst();
             computerCards.addAll(currentIds);
             currentHand.clear();
             victor = "Computer's";
@@ -238,78 +238,78 @@ public class PlaneGameActivity extends AppCompatActivity {
 
     public void speedResult(){
         choice = "Speed";
-        if (currentHand.get(0).speed > currentHand.get(1).speed){
-            winAttr = currentHand.get(0).speed.toString();
-            loseAttr = currentHand.get(1).speed.toString();
+        if (currentHand.get(0).getSpeed() > currentHand.get(1).getSpeed()){
+            winAttr = currentHand.get(0).getSpeed().toString();
+            loseAttr = currentHand.get(1).getSpeed().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).speed.toString();
-            loseAttr = currentHand.get(0).speed.toString();
+            winAttr = currentHand.get(1).getSpeed().toString();
+            loseAttr = currentHand.get(0).getSpeed().toString();
             prepareComputerWin();
         }
     }
 
     public void rangeResult(){
         choice = "Range";
-        if (currentHand.get(0).range > currentHand.get(1).range){
-            winAttr = currentHand.get(0).range.toString();
-            loseAttr = currentHand.get(1).range.toString();
+        if (currentHand.get(0).getRange() > currentHand.get(1).getRange()){
+            winAttr = currentHand.get(0).getRange().toString();
+            loseAttr = currentHand.get(1).getRange().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).range.toString();
-            loseAttr = currentHand.get(0).range.toString();
+            winAttr = currentHand.get(1).getRange().toString();
+            loseAttr = currentHand.get(0).getRange().toString();
             prepareComputerWin();
         }
     }
 
     public void heightResult(){
         choice = "Height";
-        if (currentHand.get(0).height > currentHand.get(1).height){
-            winAttr = currentHand.get(0).height.toString();
-            loseAttr = currentHand.get(1).height.toString();
+        if (currentHand.get(0).getHeight() > currentHand.get(1).getHeight()){
+            winAttr = currentHand.get(0).getHeight().toString();
+            loseAttr = currentHand.get(1).getHeight().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).height.toString();
-            loseAttr = currentHand.get(0).height.toString();
+            winAttr = currentHand.get(1).getHeight().toString();
+            loseAttr = currentHand.get(0).getHeight().toString();
             prepareComputerWin();
         }
     }
 
     public void takeoffResult(){
         choice = "Max Takeoff";
-        if (currentHand.get(0).max_takeoff > currentHand.get(1).max_takeoff){
-            winAttr = currentHand.get(0).max_takeoff.toString();
-            loseAttr = currentHand.get(1).max_takeoff.toString();
+        if (currentHand.get(0).getMax_takeoff() > currentHand.get(1).getMax_takeoff()){
+            winAttr = currentHand.get(0).getMax_takeoff().toString();
+            loseAttr = currentHand.get(1).getMax_takeoff().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).max_takeoff.toString();
-            loseAttr = currentHand.get(0).max_takeoff.toString();
+            winAttr = currentHand.get(1).getMax_takeoff().toString();
+            loseAttr = currentHand.get(0).getMax_takeoff().toString();
             prepareComputerWin();
         }
     }
 
     public void wingResult(){
         choice = "Wing Span";
-        if (currentHand.get(0).wing > currentHand.get(1).wing){
-            winAttr = currentHand.get(0).wing.toString();
-            loseAttr = currentHand.get(1).wing.toString();
+        if (currentHand.get(0).getWing() > currentHand.get(1).getWing()){
+            winAttr = currentHand.get(0).getWing().toString();
+            loseAttr = currentHand.get(1).getWing().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).wing.toString();
-            loseAttr = currentHand.get(0).wing.toString();
+            winAttr = currentHand.get(1).getWing().toString();
+            loseAttr = currentHand.get(0).getWing().toString();
             prepareComputerWin();
         }
     }
 
     public void firepowerResult(){
         choice = "Firepower";
-        if (currentHand.get(0).firepower > currentHand.get(1).firepower){
-            winAttr = currentHand.get(0).firepower.toString();
-            loseAttr = currentHand.get(1).firepower.toString();
+        if (currentHand.get(0).getFirepower() > currentHand.get(1).getFirepower()){
+            winAttr = currentHand.get(0).getFirepower().toString();
+            loseAttr = currentHand.get(1).getFirepower().toString();
             preparePlayerWin();
         }else {
-            winAttr = currentHand.get(1).firepower.toString();
-            loseAttr = currentHand.get(0).firepower.toString();
+            winAttr = currentHand.get(1).getFirepower().toString();
+            loseAttr = currentHand.get(0).getFirepower().toString();
             prepareComputerWin();
         }
     }

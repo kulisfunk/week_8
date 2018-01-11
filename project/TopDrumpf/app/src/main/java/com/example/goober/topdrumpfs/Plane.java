@@ -10,19 +10,19 @@ import java.io.Serializable;
 
 public class Plane implements Serializable{
 
-    Integer id;
-    String name;
-    String nickname;
-    String year;
-    String plane_country;
-    Integer plane_id;
-    Integer speed;
-    Integer height;
-    Integer range;
-    Integer max_takeoff;
-    Integer wing;
-    Integer firepower;
-    Integer weight1;
+    private Integer id;
+    private String name;
+    private String nickname;
+    private String year;
+    private String plane_country;
+    private Integer plane_id;
+    private Integer speed;
+    private Integer height;
+    private Integer range;
+    private Integer max_takeoff;
+    private Integer wing;
+    private Integer firepower;
+    private Integer weight1;
 
     public Plane(String name, String nickname, String year, String plane_country) {
         this.name = name;
